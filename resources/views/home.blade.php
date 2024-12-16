@@ -69,12 +69,14 @@
     <section id="hero" class="bg-light text-center py-5">
         <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                         class="active"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
                 </div>
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="slide1.jpg" class="d-block w-100" alt="...">
@@ -86,6 +88,7 @@
                         <img src="slide3.jpg" class="d-block w-100" alt="...">
                     </div>
                 </div>
+
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -108,7 +111,7 @@
                     <div class="card shadow">
                         <div class="card-body">
                             <h5 class="card-title">ارسال رایگان</h5>
-                            <p class="card-text">ارسال سریع و رایگان به سراسر کشور</p>
+                            <p class="card-text">ارسال رایگان به سراسر کشور</p>
                         </div>
                     </div>
                 </div>

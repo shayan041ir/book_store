@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // ارتباط با آیتم‌های سبد خرید
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }
