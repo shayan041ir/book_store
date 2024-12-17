@@ -24,6 +24,11 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     /**
      * رابطه با جدول Books (هر آیتم یک کتاب را نشان می‌دهد)
      */

@@ -12,26 +12,32 @@ class UserController extends Controller
 
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('items.book')->get();
         return view('user.user-dashboard', compact('orders'));
     }
 
     public function update(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:4|confirmed',
+            'address' => 'nullable|string|max:255',
         ]);
         $user = Auth::user();
+
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->address = $validatedData['address'] ?? $user->address;
         
-        // در صورت وجود رمز عبور جدید، رمز عبور را به‌روز‌رسانی کنید
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->input('password'));
+        // به‌روزرسانی رمز عبور در صورت وجود
+        if (!empty($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']);
         }
+
+        $user->save();
         
-        $user->update($request->all());
         return redirect()->back()->with('success', 'اطلاعات با موفقیت به‌روز شد');
     }
 }

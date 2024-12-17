@@ -10,6 +10,7 @@ use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CheckoutController;
 
 
 Route::get('/', [HomeControler::class, 'index'])->name('home.page');
@@ -67,6 +68,14 @@ Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 Route::get('/book/{id}', [BookController::class, 'show'])->name('book.show');
+
+Route::get('/payment', [CartController::class, 'payment'])->name('payment');
+Route::post('/payment/complete', [CartController::class, 'completePayment'])->name('payment.complete');
+
+
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
+
+
 
 Route::post('/comments/{id}', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/comments/pending', [CommentController::class, 'pendingComments'])->name('admin.comments.pending');

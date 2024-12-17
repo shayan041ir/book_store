@@ -51,4 +51,19 @@ class CartController extends Controller
         }
         return redirect()->back()->with('success', 'محصول از سبد خرید حذف شد!');
     }
+
+    public function payment()
+    {
+        $userName = auth()->user()->name; // فرض بر این است که کاربر وارد شده است.
+        $total_amount = session('total_amount', 0);
+        return view('template.payment', compact('total_amount','userName'));
+    }
+
+    public function completePayment(Request $request)
+    {
+        session()->forget('cart'); // پاک کردن سبد خرید پس از پرداخت
+        session()->forget('total_amount');
+
+        return redirect()->route('home.page')->with('success', 'پرداخت با موفقیت انجام شد!');
+    }
 }

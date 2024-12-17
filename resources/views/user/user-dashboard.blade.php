@@ -13,7 +13,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">داشبورد کاربر</a>
-            <button class="btn btn-outline-light" onclick="location.href='{{ route('home.page') }}';">بازگشت به خانه</button>
+            <button class="btn btn-outline-light" onclick="location.href='{{ route('home.page') }}';">بازگشت به
+                خانه</button>
         </div>
     </nav>
 
@@ -77,6 +78,23 @@
                 <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید.</div>
             </div>
 
+
+            <div class="mb-3">
+                <label for="email" class="form-label">ایمیل:</label>
+                <input type="email" id="email" name="email" value="{{ auth()->user()->email }}"
+                       class="form-control" required>
+                <div class="invalid-feedback">لطفاً ایمیل معتبر وارد کنید.</div>
+            </div>
+
+
+
+            <div class="mb-3">
+                <label for="address" class="form-label">آدرس:</label>
+                <input type="text" id="address" name="address" value="{{ auth()->user()->address }}"
+                    class="form-control" required>
+                <div class="invalid-feedback">لطفاً آدرس را وارد کنید.</div>
+            </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">رمز عبور جدید:</label>
                 <input type="password" id="password" name="password" class="form-control">
@@ -121,9 +139,22 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->product_name ?? 'محصول حذف شده' }}</td>
-                            <td>{{ $order->product_quantity }}</td>
-                            <td>{{ number_format($order->product_price * $order->product_quantity) }} تومان</td>
+                            <td>
+                                @foreach ($order->items as $item)
+                                    {{ $item->book->name ?? 'محصول حذف شده' }}<br>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $order->items->sum('quantity') }}
+                            </td>
+                            <td>
+                                {{ number_format(
+                                    $order->items->sum(function ($item) {
+                                        return $item->price * $item->quantity;
+                                    }),
+                                ) }}
+                                تومان
+                            </td>
                             <td class="order-status" data-order-id="{{ $order->id }}">ارسال شده</td>
                         </tr>
                     @endforeach
