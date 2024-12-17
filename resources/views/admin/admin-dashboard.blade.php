@@ -143,7 +143,6 @@
         <h2>Admin Panel</h2>
         <ul>
             <li><a href="{{ route('admin.dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="#factor-tab"><i class="fas fa-chart-line"></i> Analytics</a></li>
             <li><a href="{{ route('home.page') }}"><i class="fas fa-sign-out-alt"></i> home page</a></li>
         </ul>
     </div>
@@ -156,28 +155,6 @@
         </nav>
 
         <div class="container mt-4">
-            {{-- <div class="row">
-                <div class="col-md-4">
-                    <div class="card text-center p-3">
-                        <h5><i class="fas fa-users"></i> Total Users</h5>
-                        <p class="mt-2">{{ $users->count() }}</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center p-3">
-                        <h5><i class="fas fa-shopping-cart"></i> Total Sales</h5>
-                        <p class="mt-2">ـ {{ number_format($totalSales) }} تومان</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center p-3">
-                        <h5><i class="fas fa-chart-line"></i> Monthly Growth</h5>
-                        <p class="mt-2">{{ round($monthlyGrowth, 2) }}%</p>
-                    </div>
-                </div>
-            </div> --}}
-
-
 
             <div class="mt-4">
                 <ul class="nav nav-tabs" id="bladeTabs" role="tablist">
