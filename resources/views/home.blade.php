@@ -226,16 +226,20 @@
     <section id="authors" class="py-5">
         <div class="container">
             <h2 class="text-center">نویسندگان</h2>
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">نویسنده ۱</h5>
+            @foreach ($authors as $author)
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <img src="{{ asset('storage/' . $author->image) }}" alt="author Image"
+                                    width="50">
+                                <h5 class="card-title">{{ $author->name }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- تکرار برای بقیه نویسندگان -->
-            </div>
+            @endforeach
+        </div>
+
         </div>
     </section>
 
@@ -244,14 +248,18 @@
         <div class="container">
             <h2 class="text-center">مترجمان</h2>
             <div class="row text-center">
+                @foreach ($translators as $translator)
                 <div class="col-md-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">مترجمان ۱</h5>
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <img src="{{ asset('storage/' . $translator->image) }}" alt="translator Image"
+                                    width="50">
+                                <h5 class="card-title">{{ $translator->name }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- تکرار برای بقیه نویسندگان -->
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -261,14 +269,17 @@
         <div class="container">
             <h2 class="text-center">ناشران</h2>
             <div class="row text-center">
+                @foreach ($publishers as $publisher)
                 <div class="col-md-4">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">ناشران ۱</h5>
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <img src="{{ asset('storage/' . $publisher->image) }}" alt="publisher Image"
+                                    width="50">
+                                <h5 class="card-title">{{ $publisher->name }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- تکرار برای بقیه نویسندگان -->
+                @endforeach
             </div>
         </div>
     </section>

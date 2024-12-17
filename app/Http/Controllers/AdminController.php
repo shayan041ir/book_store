@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Admin;
 use App\Models\Book;
 use App\Models\User;
 use App\Models\Slider;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Author;
+use App\Models\Translator;
+use App\Models\Publisher;
 
 class AdminController extends Controller
 {
@@ -22,7 +25,11 @@ class AdminController extends Controller
         $books = Book::all();
         $sliders = Slider::all();
         $categories = Category::all();
-        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories'));
+        $authors = Author::all();
+        $translators = Translator::all();
+        $publishers = Publisher::all();
+
+        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers'));
     }
 
     // admin manage
@@ -164,5 +171,137 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'اسلاید جدید با موفقیت اضافه شد!');
     }
+
+
+    // author
+    public function showauthor()
+    {
+        $authors = Author::all();
+        return view('admin.admin-dashboard', compact('authors'));
+    }
+    public function authorsstore(Request $request)
+    {
+        // dd($request->validate(['image']));
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+
+        // آپلود تصویر
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('authors', 'public');
+        }
+
+        // ذخیره اطلاعات نویسنده
+        $author = new Author();
+        $author->name = $request->name;
+        $author->description = $request->description;
+        $author->image = $imagePath;
+        $author->save();
+
+        return redirect()->back()->with('success', 'نویسنده جدید با موفقیت اضافه شد!');
+    }
+    public function authorsdestroy($id)
+    {
+        $author = Author::find($id);
+        if (!$author) {
+            return redirect()->back()->with('error', 'نویسنده مورد نظر پیدا نشد!');
+        }
+        $author->delete();
+        return redirect()->back()->with('success', 'نویسنده با موفقیت حذف شد!');
+    }
+
+
+    // translators
+
+    public function showtranslator()
+    {
+        $translators = Translator::all();
+        return view('admin.admin-dashboard', compact('translators'));
+    }
+    public function translatorstore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+
+        // آپلود تصویر
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('translators', 'public');
+        }
+
+        // ذخیره اطلاعات مترجم
+        $translators = new Translator();
+        $translators->name = $request->name;
+        $translators->description = $request->description;
+        $translators->image = $imagePath;
+        $translators->save();
+
+        return redirect()->back()->with('success', 'مترجم جدید با موفقیت اضافه شد!');
+    }
+    public function translatordestroy($id)
+    {
+        $translators = Translator::find($id);
+        if (!$translators) {
+            return redirect()->back()->with('error', 'مترجم مورد نظر پیدا نشد!');
+        }
+        $translators->delete();
+        return redirect()->back()->with('success', 'مترجم با موفقیت حذف شد!');
+    }
+
+
+
+    // publishers
+
+    public function showpublisher()
+    {
+        $publishers = Publisher::all();
+        return view('admin.admin-dashboard', compact('translators'));
+    }
+    public function publisherstore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+
+        // آپلود تصویر
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('publishers', 'public');
+        }
+
+        // ذخیره اطلاعات ناشر
+        $publishers = new Publisher();
+        $publishers->name = $request->name;
+        $publishers->description = $request->description;
+        $publishers->image = $imagePath;
+        $publishers->save();
+
+        return redirect()->back()->with('success', 'ناشر جدید با موفقیت اضافه شد!');
+    }
+    public function publisherdestroy($id)
+    {
+        $publishers = Publisher::find($id);
+        if (!$publishers) {
+            return redirect()->back()->with('error', 'ناشر مورد نظر پیدا نشد!');
+        }
+        $publishers->delete();
+        return redirect()->back()->with('success', 'ناشر با موفقیت حذف شد!');
+    }
+
+
+
+
+
 
 }

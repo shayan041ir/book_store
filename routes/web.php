@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CategoryController;
+use App\Models\Admin;
 
 Route::get('/', function () {
     return view('home');
@@ -44,6 +45,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/dashboard.show-category', [CategoryController::class, 'create'])->name('categories.show');
         Route::delete('/dashboard.delete-category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
         Route::post('/dashboard.add-category', [CategoryController::class, 'store'])->name('categories.store');
+
+
+        Route::get('dashboard-author',[AdminController::class, 'showauthor'])->name('showauthor');
+        Route::post('dashboard-add-author',[AdminController::class, 'authorsstore'])->name('authors.store');
+        Route::delete('dashboard-destroy-author/{id}',[AdminController::class, 'authorsdestroy'])->name('authors.destroy');
+
+
+        Route::get('dashboard-translator',[AdminController::class, 'showtranslator'])->name('showtranslators');
+        Route::post('dashboard-add-translator',[AdminController::class, 'translatorstore'])->name('translators.store');
+        Route::delete('dashboard-destroy-translator/{id}',[AdminController::class, 'translatordestroy'])->name('translators.destroy');
+
+
+        Route::get('dashboard-publisher',[AdminController::class, 'showpublisher'])->name('showpublishers');
+        Route::post('dashboard-add-publisher',[AdminController::class, 'publisherstore'])->name('publishers.store');
+        Route::delete('dashboard-destroy-publisher/{id}',[AdminController::class, 'publisherdestroy'])->name('publishers.destroy');
     });
 });
 

@@ -201,17 +201,17 @@
                             Product</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments"
-                            type="button" role="tab" aria-controls="comments" aria-selected="false">author</button>
+                        <button class="nav-link" id="add-author-tab" data-bs-toggle="tab" data-bs-target="#add-author"
+                            type="button" role="tab" aria-controls="add-author" aria-selected="false">author</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments"
-                            type="button" role="tab" aria-controls="comments"
+                        <button class="nav-link" id="add-translator-tab" data-bs-toggle="tab" data-bs-target="#add-translator"
+                            type="button" role="tab" aria-controls="add-translator"
                             aria-selected="false">translator</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments"
-                            type="button" role="tab" aria-controls="comments"
+                        <button class="nav-link" id="add-publisher-tab" data-bs-toggle="tab" data-bs-target="#add-publisher"
+                            type="button" role="tab" aria-controls="add-publisher"
                             aria-selected="false">publisher</button>
                     </li>
                     <li class="nav-item" role="presentation">
@@ -240,14 +240,14 @@
                     <div class="tab-pane fade" id="add-product" role="tabpanel" aria-labelledby="add-product-tab">
                         @include('admin.add-book')
                     </div>
-                    <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                    <div class="tab-pane fade" id="add-author" role="tabpanel" aria-labelledby="add-author-tab">
                         @include('admin.add-author')
                     </div>
-                    <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                        {{-- @include('admin.add-translator') --}}
+                    <div class="tab-pane fade" id="add-translator" role="tabpanel" aria-labelledby="add-translator-tab">
+                        @include('admin.add-translator')
                     </div>
-                    <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                        {{-- @include('admin.add-publisher') --}}
+                    <div class="tab-pane fade" id="add-publisher" role="tabpanel" aria-labelledby="add-publisher-tab">
+                        @include('admin.add-publisher')
                     </div>
                     <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
                         {{-- @include('admin.check-comments') --}}

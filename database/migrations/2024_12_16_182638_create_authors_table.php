@@ -12,6 +12,7 @@ class CreateAuthorsTable extends Migration
             $table->id();
             $table->string('name')->unique(); // نام نویسنده
             $table->text('description')->nullable(); // توضیحات در مورد نویسنده
+            $table->string('image')->nullable(); // تصویر نویسنده
             $table->timestamps(); // زمان ایجاد و بروزرسانی
         });
     }

@@ -12,6 +12,7 @@ class CreatePublishersTable extends Migration
             $table->id();
             $table->string('name')->unique(); // نام ناشر
             $table->text('description')->nullable(); // توضیحات در مورد ناشر
+            $table->string('image')->nullable(); // تصویر ناشر
             $table->timestamps(); // زمان ایجاد و بروزرسانی
         });
     }

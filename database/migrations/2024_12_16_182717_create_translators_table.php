@@ -12,6 +12,7 @@ class CreateTranslatorsTable extends Migration
             $table->id();
             $table->string('name')->unique(); // نام مترجم
             $table->text('description')->nullable(); // توضیحات در مورد مترجم
+            $table->string('image')->nullable(); // تصویر مترجم
             $table->timestamps(); // زمان ایجاد و بروزرسانی
         });
     }
