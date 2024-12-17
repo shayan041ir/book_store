@@ -7,6 +7,26 @@ body {
     color: #333;
 }
 
+a {
+    color: inherit;
+    /* یا یک رنگ مشخص برای لینک‌ها تعیین کنید */
+    text-decoration: none;
+}
+
+/* برای تغییر رنگ لینک‌ها به یک رنگ خاص */
+a {
+    color: #333;
+    /* به عنوان مثال، رنگ مشکی */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #007bff;
+    /* رنگ لینک‌ها هنگام هاور */
+    text-decoration: underline;
+    /* می‌توانید این خط را هم حذف کنید */
+}
+
 .container {
     width: 90%;
     margin: auto;
@@ -196,8 +216,6 @@ footer ul {
     font-size: 0.9rem;
 }
 
-
-
 /* انیمیشن‌ها */
 @keyframes fadeIn {
     from {
@@ -222,7 +240,8 @@ footer ul {
 }
 
 @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-15deg);
     }
     50% {

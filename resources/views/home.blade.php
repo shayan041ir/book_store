@@ -25,7 +25,8 @@
                     <li class="nav-item"><a href="#hero" class="nav-link text-white">خانه</a></li>
                     <li class="nav-item"><a href="#books" class="nav-link text-white">کتاب‌ها</a></li>
                     <li class="nav-item"><a href="#authors" class="nav-link text-white">نویسندگان</a></li>
-                    <li class="nav-item"><a href="{{ route('cart.view') }}" class="nav-link text-white">سبد خرید</a></li>
+                    <li class="nav-item"><a href="{{ route('cart.view') }}" class="nav-link text-white">سبد خرید</a>
+                    </li>
 
                     <!-- اگر کاربر یا ادمین لاگین نکرده -->
                     @guest('web')
@@ -140,17 +141,19 @@
                     <div class="col-md-3">
                         <div class="card shadow">
                             <div class="card-body">
-                                <div>
-                                    @if ($book->image)
-                                        <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
-                                            width="50">
-                                    @else
-                                        <span>بدون تصویر</span>
-                                    @endif
-                                    <h5>{{ $book->name }}</h5>
-                                    <p>نویسنده: {{ $book->author }}</p>
-                                    <p>{{ number_format($book->price) }} تومان</p>
-                                </div>
+                                <a href="{{ route('book.show', ['id' => $book->id]) }}">
+                                    <div>
+                                        @if ($book->image)
+                                            <img src="{{ asset('storage/' . $book->image) }}"
+                                                alt="{{ $book->name }}" width="50">
+                                        @else
+                                            <span>بدون تصویر</span>
+                                        @endif
+                                        <h5>{{ $book->name }}</h5>
+                                        <p>نویسنده: {{ $book->author }}</p>
+                                        <p>{{ number_format($book->price) }} تومان</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -201,23 +204,27 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($books as $book)
+                @forelse ($books as $book)
                     <div class="col-md-3">
                         <div class="card shadow">
                             <div class="card-body">
-                                @if ($book->image)
-                                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
-                                        width="50">
-                                @else
-                                    <span>بدون تصویر</span>
-                                @endif
-                                <h5 class="card-title">{{ $book->name }}</h5>
-                                <p>نویسنده: {{ $book->author }}</p>
-                                <p>{{ number_format($book->price) }} تومان</p>
+                                <a href="{{ route('book.show', ['id' => $book->id]) }}">
+                                    @if ($book->image)
+                                        <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
+                                            width="50">
+                                    @else
+                                        <span>بدون تصویر</span>
+                                    @endif
+                                    <h5 class="card-title">{{ $book->name }}</h5>
+                                    <p>نویسنده: {{ $book->author }}</p>
+                                    <p>{{ number_format($book->price) }} تومان</p>
+                                </a>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p>هیچ محصولی یافت نشد.</p>
+                @endforelse
             </div>
         </div>
     </section>

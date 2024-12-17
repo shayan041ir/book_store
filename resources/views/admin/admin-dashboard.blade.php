@@ -250,7 +250,7 @@
                         @include('admin.add-publisher')
                     </div>
                     <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                        {{-- @include('admin.check-comments') --}}
+                        @include('admin.check-comments')
                     </div>
                     <div class="tab-pane fade" id="factor" role="tabpanel" aria-labelledby="factor-tab">
                         {{-- @include('admin.admin-factor') --}}

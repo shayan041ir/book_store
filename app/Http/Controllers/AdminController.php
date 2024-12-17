@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Author;
 use App\Models\Translator;
 use App\Models\Publisher;
+use App\Models\Comment;
 
 class AdminController extends Controller
 {
@@ -28,8 +29,9 @@ class AdminController extends Controller
         $authors = Author::all();
         $translators = Translator::all();
         $publishers = Publisher::all();
+        $comments = Comment::where('is_approved', false)->get();        
 
-        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers'));
+        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers','comments'));
     }
 
     // admin manage

@@ -26,4 +26,8 @@ class Comment extends Model
     {
         return $this->is_approved;
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

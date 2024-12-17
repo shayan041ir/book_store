@@ -93,4 +93,13 @@ class BookController extends Controller
 
         return redirect()->back()->with('success', 'کتاب با موفقیت حذف شد');
     }
+
+    public function show($id)
+    {
+        $book = Book::with('comments.user')->findOrFail($id);
+
+        // ارسال محصول به ویو
+        return view('template.book-detailes', compact('book'));
+    }
+
 }

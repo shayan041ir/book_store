@@ -9,7 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
-use App\Models\Admin;
+use App\Http\Controllers\CommentController;
 
 
 Route::get('/', [HomeControler::class, 'index'])->name('home.page');
@@ -66,6 +66,12 @@ Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('cart.add'
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
+Route::get('/book/{id}', [BookController::class, 'show'])->name('book.show');
+
+Route::post('/comments/{id}', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/pending', [CommentController::class, 'pendingComments'])->name('admin.comments.pending');
+Route::patch('/comments/{id}/approve', [CommentController::class, 'approve'])->name('admin.comments.approve');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
 
 Route::prefix('user')->group(function () {
     Route::middleware('user')->group(function () {
