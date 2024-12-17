@@ -78,27 +78,12 @@
                 </div>
 
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="slide1.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="slide2.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="slide3.jpg" class="d-block w-100" alt="...">
-                    </div>
+                    @foreach ($sliders as $slider)
+                        <div class="carousel-item active">
+                            <img src="{{ asset('storage/' . $slider->image_path) }}" alt="Slider Image" width="150">
+                        </div>
+                    @endforeach
                 </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">قبلی</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">بعدی</span>
-                </button>
             </div>
         </div>
     </section>
@@ -151,14 +136,25 @@
             <div class="row">
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">کتاب ۱</h5>
-                            <p class="card-text">توضیحات کوتاه در مورد کتاب</p>
+                @foreach ($bestSellingBooks as $book)
+                    <div class="col-md-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div>
+                                    @if ($book->image)
+                                        <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
+                                            width="50">
+                                    @else
+                                        <span>بدون تصویر</span>
+                                    @endif
+                                    <h5>{{ $book->name }}</h5>
+                                    <p>نویسنده: {{ $book->author }}</p>
+                                    <p>{{ number_format($book->price) }} تومان</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -196,23 +192,32 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <select class="form-select" id="filter">
-                        <option value="">همه</option>
-                        <option value="novel">رمان</option>
-                        <option value="science">علمی</option>
-                        <option value="history">تاریخی</option>
+                        <option value="all">همه دسته‌ها</option>
+                        @foreach ($categories as $Category)
+                            <option value="{{ $Category->id }}">{{ $Category->name }}</option>
+                        @endforeach
                     </select>
+                    {{-- <button id="filter-button">اعمال فیلتر</button>  --}}
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">کتاب ۱</h5>
-                            <p class="card-text">توضیحات کوتاه در مورد کتاب</p>
+                @foreach ($books as $book)
+                    <div class="col-md-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                @if ($book->image)
+                                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
+                                        width="50">
+                                @else
+                                    <span>بدون تصویر</span>
+                                @endif
+                                <h5 class="card-title">{{ $book->name }}</h5>
+                                <p>نویسنده: {{ $book->author }}</p>
+                                <p>{{ number_format($book->price) }} تومان</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- تکرار برای بقیه کتاب‌ها -->
+                @endforeach
             </div>
         </div>
     </section>

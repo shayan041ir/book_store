@@ -19,6 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher'); // ناشر
             $table->string('author'); // نویسنده
             $table->year('publication_year'); // سال انتشار
+            $table->boolean('is_best_seller')->default(false);
             $table->timestamps(); // زمان ایجاد و بروزرسانی
         });
     }

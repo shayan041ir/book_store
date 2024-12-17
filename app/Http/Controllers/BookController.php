@@ -29,6 +29,7 @@ class BookController extends Controller
             'published_year' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
             'category_id' => 'nullable|array',  // بررسی وجود دسته‌بندی در جدول
             'category_id.*' => 'exists:categories,id',  // بررسی وجود دسته‌بندی در جدول
+            'is_best_seller' => 'nullable|boolean',
         ], [
             'image.required' => 'تصویر کتاب الزامی است.',
             'image.image' => 'فایل باید یک تصویر باشد.',
@@ -57,7 +58,7 @@ class BookController extends Controller
 
 
         $book = new Book();
-        $book->image = $request->image;
+        $book->image = $imagePath; // مقدار درست مسیر تصویر
         $book->name = $request->title;
         $book->price = $request->price;
         $book->page_count = $request->page_count;
@@ -65,7 +66,9 @@ class BookController extends Controller
         $book->translator = $request->translator;
         $book->publisher = $request->publisher;
         $book->author = $request->author;
-        $book->publication_year	 = $request->published_year;
+        $book->publication_year     = $request->published_year;
+        $book->is_best_seller = $request->has('is_best_seller') ? true : false; // چک کردن مقدار چک‌باکس
+
         $book->save();
 
         // اتصال دسته‌بندی‌ها

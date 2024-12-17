@@ -44,10 +44,13 @@
         @foreach ($categories as $Category)
             <option value="{{ $Category->id }}">{{ $Category->name }}</option>
         @endforeach
-
     </select>
     <br>
 
+    <label>
+        <input type="checkbox" name="is_best_seller" value="1"> کتاب پرفروش
+    </label>
+    <br>
 
     <button type="submit">افزودن کتاب</button>
 </form>
@@ -72,8 +75,7 @@
                     <td>{{ $book->id }}</td>
                     <td>
                         @if ($book->image)
-                            <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
-                                width="50">
+                            <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}" width="50">
                         @else
                             <span>بدون تصویر</span>
                         @endif

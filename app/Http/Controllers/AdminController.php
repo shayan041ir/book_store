@@ -25,6 +25,7 @@ class AdminController extends Controller
         return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories'));
     }
 
+    // admin manage
     public function addAdmin(Request $request)
     {
         $request->validate([
@@ -87,7 +88,7 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', "ادمین {$admin->name} با موفقیت حذف شد.");
     }
 
-
+    // user manage
     public function addUser(Request $request)
     {
         $request->validate([
@@ -118,8 +119,8 @@ class AdminController extends Controller
     public function showSliderManagement()
     {
         $sliders = Slider::all();
-        $products = Book::all(); // لیست محصولات برای لینک‌دادن
-        return view('admin.add-slider', compact('sliders', 'products'));
+        $books = Book::all(); // لیست محصولات برای لینک‌دادن
+        return view('admin.add-slider', compact('sliders', 'books'));
     }
 
     public function deleteSlider($id)
@@ -163,4 +164,5 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'اسلاید جدید با موفقیت اضافه شد!');
     }
+
 }

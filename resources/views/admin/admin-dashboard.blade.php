@@ -201,10 +201,6 @@
                             Product</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="brands-tab" data-bs-toggle="tab" data-bs-target="#brands"
-                            type="button" role="tab" aria-controls="brands" aria-selected="false">Brands</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
                         <button class="nav-link" id="comments-tab" data-bs-toggle="tab" data-bs-target="#comments"
                             type="button" role="tab" aria-controls="comments" aria-selected="false">author</button>
                     </li>
@@ -244,11 +240,8 @@
                     <div class="tab-pane fade" id="add-product" role="tabpanel" aria-labelledby="add-product-tab">
                         @include('admin.add-book')
                     </div>
-                    <div class="tab-pane fade" id="brands" role="tabpanel" aria-labelledby="comments-tab">
-                        {{-- @include('admin.add-category') --}}
-                    </div>
                     <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-                        {{-- @include('admin.add-author') --}}
+                        @include('admin.add-author')
                     </div>
                     <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
                         {{-- @include('admin.add-translator') --}}
