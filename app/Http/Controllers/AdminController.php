@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\Slider;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -21,7 +22,7 @@ class AdminController extends Controller
         $books = Book::all();
         $sliders = Slider::all();
         $categories = Category::all();
-        return view('admin.admin-dashboard', compact('admins','users','books','sliders','categories'));
+        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories'));
     }
 
     public function addAdmin(Request $request)
@@ -111,4 +112,55 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', "کاربر {$user->name} با موفقیت حذف شد.");
     }
 
+
+
+    // مدریت اسلایدر 
+    public function showSliderManagement()
+    {
+        $sliders = Slider::all();
+        $products = Book::all(); // لیست محصولات برای لینک‌دادن
+        return view('admin.add-slider', compact('sliders', 'products'));
+    }
+
+    public function deleteSlider($id)
+    {
+        $slider = Slider::findOrFail($id);
+
+        // حذف تصویر از فضای ذخیره‌سازی
+        if ($slider->image_path) {
+            Storage::disk('public')->delete($slider->image_path);
+        }
+
+        // حذف رکورد از دیتابیس
+        $slider->delete();
+
+        return redirect()->back()->with('success', 'اسلاید با موفقیت حذف شد!');
+    }
+
+    public function uploadSlider(Request $request)
+    {
+        $request->validate([
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'book_id' => 'nullable|exists:books,id',
+            'title' => 'required|string|max:255',
+        ]);
+
+        $path = $request->file('image_path')->store('sliders', 'public');
+
+        if (Slider::count() >= 4) {
+            $oldestSlider = Slider::oldest()->first();
+            if ($oldestSlider) {
+                Storage::disk('public')->delete($oldestSlider->image_path);
+                $oldestSlider->delete();
+            }
+        }
+
+        Slider::create([
+            'image_path' => $path,
+            'book_id' => $request->book_id,
+            'title' => $request->title,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('success', 'اسلاید جدید با موفقیت اضافه شد!');
+    }
 }

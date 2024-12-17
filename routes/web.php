@@ -32,9 +32,10 @@ Route::prefix('admin')->group(function () {
         Route::put('/admin/update', [AdminController::class, 'adminupdate'])->name('admin.update');
         Route::post('/dashboard-adduser', [AdminController::class, 'adduser'])->name('admin.adduser');
         Route::delete('/dashboard-deleteuser/{id}', [AdminController::class, 'deleteUser'])->name('user.delete');
+
         Route::get('/ashboard-show-slider', [AdminController::class, 'showSliderManagement'])->name('show-slider');
         Route::delete('/ashboard-delete-slider/{id}', [AdminController::class, 'deleteSlider'])->name('slider.delete');
-        Route::post('/ashboard-slider', [AdminController::class, 'uploadSlider'])->name('admin.slider.upload');
+        Route::post('/ashboard-slider', [AdminController::class, 'uploadSlider'])->name('slider.upload');
 
         Route::get('dashboard-addbook-page', [BookController::class, 'index'])->name('books.page');
         Route::post('dashboard-addbook', [BookController::class, 'store'])->name('books.store');

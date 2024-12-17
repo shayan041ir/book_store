@@ -1,12 +1,12 @@
 <div class="add-admin">
     <h2>مدیریت اسلایدر</h2>
 
-    <form action="{{ route('admin.slider.upload') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('slider.upload') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="book_id">کتاب مرتبط:</label>
         <select name="book_id" id="book_id" required>
             @foreach ($books as $book)
-                <option value="{{ $book->id }}">{{ $book->title }}</option>
+                <option value="{{ $book->id }}">{{ $book->name }}</option>
             @endforeach
         </select>
     
