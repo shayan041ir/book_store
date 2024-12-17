@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
-
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -23,14 +19,11 @@ class LoginController extends Controller
         $credentials = $request->only('name', 'password');
 
 
-        $admin = \App\Models\Admin::where('name', $request->name)->first();
-        if (!$admin) {
-            return back()->withErrors(['message' => 'Admin not found.']);
-        }
         // تلاش برای احراز هویت به عنوان ادمین
         if (Auth::guard('admin')->attempt($credentials)) {
             return redirect()->route('admin.dashboard');
         }
+
 
         // تلاش برای احراز هویت به عنوان کاربر معمولی
         if (Auth::guard('web')->attempt($credentials)) {

@@ -87,7 +87,7 @@
         <h1>Login</h1>
         <form action="{{ route('login') }}" method="post">
             @csrf
-            <label for="username">Username:</label>
+            <label for="name">Username:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="password">Password:</label>

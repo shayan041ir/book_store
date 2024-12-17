@@ -8,12 +8,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
 use App\Models\Admin;
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('home', [HomeControler::class, 'index'])->name('home.page');
+
+Route::get('/', [HomeControler::class, 'index'])->name('home.page');
 
 
 Route::get('login-form', [LoginController::class, 'index'])->name('login-form');
@@ -63,8 +62,14 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+
 Route::prefix('user')->group(function () {
     Route::middleware('user')->group(function () {
         Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
+        Route::put('dashboard-user-update', [UserController::class, 'update'])->name('user.update');
     });
 });

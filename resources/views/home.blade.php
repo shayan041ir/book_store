@@ -25,7 +25,7 @@
                     <li class="nav-item"><a href="#hero" class="nav-link text-white">خانه</a></li>
                     <li class="nav-item"><a href="#books" class="nav-link text-white">کتاب‌ها</a></li>
                     <li class="nav-item"><a href="#authors" class="nav-link text-white">نویسندگان</a></li>
-                    <li class="nav-item"><a href="#features" class="nav-link text-white">سبد خرید</a></li>
+                    <li class="nav-item"><a href="{{ route('cart.view') }}" class="nav-link text-white">سبد خرید</a></li>
 
                     <!-- اگر کاربر یا ادمین لاگین نکرده -->
                     @guest('web')
@@ -249,7 +249,7 @@
             <h2 class="text-center">مترجمان</h2>
             <div class="row text-center">
                 @foreach ($translators as $translator)
-                <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <img src="{{ asset('storage/' . $translator->image) }}" alt="translator Image"
@@ -270,7 +270,7 @@
             <h2 class="text-center">ناشران</h2>
             <div class="row text-center">
                 @foreach ($publishers as $publisher)
-                <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <img src="{{ asset('storage/' . $publisher->image) }}" alt="publisher Image"
