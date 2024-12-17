@@ -47,19 +47,29 @@ Route::prefix('admin')->group(function () {
         Route::post('/dashboard.add-category', [CategoryController::class, 'store'])->name('categories.store');
 
 
-        Route::get('dashboard-author',[AdminController::class, 'showauthor'])->name('showauthor');
-        Route::post('dashboard-add-author',[AdminController::class, 'authorsstore'])->name('authors.store');
-        Route::delete('dashboard-destroy-author/{id}',[AdminController::class, 'authorsdestroy'])->name('authors.destroy');
+        Route::get('dashboard-author', [AdminController::class, 'showauthor'])->name('showauthor');
+        Route::post('dashboard-add-author', [AdminController::class, 'authorsstore'])->name('authors.store');
+        Route::delete('dashboard-destroy-author/{id}', [AdminController::class, 'authorsdestroy'])->name('authors.destroy');
 
 
-        Route::get('dashboard-translator',[AdminController::class, 'showtranslator'])->name('showtranslators');
-        Route::post('dashboard-add-translator',[AdminController::class, 'translatorstore'])->name('translators.store');
-        Route::delete('dashboard-destroy-translator/{id}',[AdminController::class, 'translatordestroy'])->name('translators.destroy');
+        Route::get('dashboard-translator', [AdminController::class, 'showtranslator'])->name('showtranslators');
+        Route::post('dashboard-add-translator', [AdminController::class, 'translatorstore'])->name('translators.store');
+        Route::delete('dashboard-destroy-translator/{id}', [AdminController::class, 'translatordestroy'])->name('translators.destroy');
 
 
-        Route::get('dashboard-publisher',[AdminController::class, 'showpublisher'])->name('showpublishers');
-        Route::post('dashboard-add-publisher',[AdminController::class, 'publisherstore'])->name('publishers.store');
-        Route::delete('dashboard-destroy-publisher/{id}',[AdminController::class, 'publisherdestroy'])->name('publishers.destroy');
+        Route::get('dashboard-publisher', [AdminController::class, 'showpublisher'])->name('showpublishers');
+        Route::post('dashboard-add-publisher', [AdminController::class, 'publisherstore'])->name('publishers.store');
+        Route::delete('dashboard-destroy-publisher/{id}', [AdminController::class, 'publisherdestroy'])->name('publishers.destroy');
+
+        Route::get('/dashboard-factor', [AdminController::class, 'showOrders'])->name('factor.show');
+    });
+});
+
+
+Route::prefix('user')->group(function () {
+    Route::middleware('user')->group(function () {
+        Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
+        Route::put('dashboard-user-update', [UserController::class, 'update'])->name('user.update');
     });
 });
 
@@ -81,10 +91,3 @@ Route::post('/comments/{id}', [CommentController::class, 'store'])->name('commen
 Route::get('/comments/pending', [CommentController::class, 'pendingComments'])->name('admin.comments.pending');
 Route::patch('/comments/{id}/approve', [CommentController::class, 'approve'])->name('admin.comments.approve');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
-
-Route::prefix('user')->group(function () {
-    Route::middleware('user')->group(function () {
-        Route::get('dashboard', [UserController::class, 'index'])->name('user.dashboard');
-        Route::put('dashboard-user-update', [UserController::class, 'update'])->name('user.update');
-    });
-});

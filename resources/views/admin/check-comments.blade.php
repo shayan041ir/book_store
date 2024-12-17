@@ -1,10 +1,8 @@
 <h3>نظرات در انتظار تأیید</h3>
-@php
-    // $comments = \App\Models\Comment::where('is_approved', false)->get();
-@endphp
+
 @forelse ($comments as $comment)
     <div class="border p-3 mb-2">
-        <strong>{{ $comment->user->name }}</strong> گفت:
+        <strong>{{ $comment->user->name ?? 'کاربر ناشناس' }}</strong> گفت:
         <p>{{ $comment->content }}</p>
         <small class="text-muted">در {{ $comment->created_at->format('Y-m-d H:i') }}</small>
 

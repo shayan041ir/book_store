@@ -15,6 +15,7 @@ use App\Models\Author;
 use App\Models\Translator;
 use App\Models\Publisher;
 use App\Models\Comment;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -30,8 +31,15 @@ class AdminController extends Controller
         $translators = Translator::all();
         $publishers = Publisher::all();
         $comments = Comment::where('is_approved', false)->get();        
+        $orders = Order::with(['user', 'items.book'])->get();
+        // محاسبه مجموع قیمت کل همه سفارش‌ها
+        $totalSales = $orders->sum(function ($order) {
+            return $order->items->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+        });
 
-        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers','comments'));
+        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers','comments', 'orders' , 'totalSales'));
     }
 
     // admin manage
@@ -303,7 +311,20 @@ class AdminController extends Controller
 
 
 
-
+    public function showOrders()
+    {
+        $orders = Order::with(['user', 'items.book'])->get();
+    
+        // محاسبه مجموع قیمت کل همه سفارش‌ها
+        $totalSales = $orders->sum(function ($order) {
+            return $order->items->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+        });
+    
+        return view('admin.admin-factor', compact('orders', 'totalSales'));
+    }
+    
 
 
 }

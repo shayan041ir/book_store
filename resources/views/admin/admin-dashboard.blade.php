@@ -253,7 +253,7 @@
                         @include('admin.check-comments')
                     </div>
                     <div class="tab-pane fade" id="factor" role="tabpanel" aria-labelledby="factor-tab">
-                        {{-- @include('admin.admin-factor') --}}
+                        @include('admin.admin-factor')
                     </div>
                 </div>
             </div>

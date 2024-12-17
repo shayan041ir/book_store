@@ -13,6 +13,7 @@ class Comment extends Model
         'book_id',
         'content',
         'is_approved',
+        'user_id',
     ];
 
     // ارتباط با مدل کتاب
