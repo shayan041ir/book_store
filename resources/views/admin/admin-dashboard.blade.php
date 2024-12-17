@@ -233,16 +233,16 @@
                 <div class="tab-content mt-4" id="bladeTabsContent">
                     <div class="tab-pane fade show active" id="add-admin" role="tabpanel"
                         aria-labelledby="add-admin-tab">
-                        {{-- @include('admin.add-admin') --}}
+                        @include('admin.add-admin')
                     </div>
                     <div class="tab-pane fade" id="add-user" role="tabpanel" aria-labelledby="add-user-tab">
-                        {{-- @include('admin.add-user') --}}
+                        @include('admin.add-user')
                     </div>
                     <div class="tab-pane fade" id="slider" role="tabpanel" aria-labelledby="slider-tab">
-                        {{-- @include('admin.add-slider') --}}
+                        @include('admin.add-slider')
                     </div>
                     <div class="tab-pane fade" id="add-product" role="tabpanel" aria-labelledby="add-product-tab">
-                        {{-- @include('admin.add-book') --}}
+                        @include('admin.add-book')
                     </div>
                     <div class="tab-pane fade" id="brands" role="tabpanel" aria-labelledby="comments-tab">
                         {{-- @include('admin.add-category') --}}

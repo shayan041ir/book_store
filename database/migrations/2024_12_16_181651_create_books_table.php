@@ -14,6 +14,7 @@ class CreateBooksTable extends Migration
             $table->string('name'); // نام کتاب
             $table->decimal('price', 10, 2); // قیمت
             $table->integer('page_count'); // تعداد صفحه
+            $table->integer('stock');
             $table->string('translator')->nullable(); // مترجم
             $table->string('publisher'); // ناشر
             $table->string('author'); // نویسنده
