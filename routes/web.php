@@ -93,3 +93,9 @@ Route::post('/comments/{id}', [CommentController::class, 'store'])->name('commen
 Route::get('/comments/pending', [CommentController::class, 'pendingComments'])->name('admin.comments.pending');
 Route::patch('/comments/{id}/approve', [CommentController::class, 'approve'])->name('admin.comments.approve');
 Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
+
+
+
+Route::get('/author/{id}', [HomeControler::class, 'show_author'])->name('author.show');
+Route::get('/translator/{id}', [HomeControler::class, 'show_translator'])->name('translator.show');
+Route::get('/publisher/{id}', [HomeControler::class, 'show_publisher'])->name('publisher.show');

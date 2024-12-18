@@ -24,5 +24,23 @@ class HomeControler extends Controller
         $publishers = \App\Models\Publisher::all();
 
         return view('home', compact('sliders', 'books', 'categories', 'bestSellingBooks', 'authors', 'translators', 'publishers'));
-    }   
+    }
+
+    public function show_author($id)
+    {
+        $author = Author::findOrFail($id);
+        return view('authors.show', compact('author'));
+    }
+
+    public function show_translator($id)
+    {
+        $translator = Translator::findOrFail($id);
+        return view('translators.show', compact('translator'));
+    }
+
+    public function show_publisher($id)
+    {
+        $publisher = Publisher::findOrFail($id);
+        return view('publishers.show', compact('publisher'));
+    }
 }

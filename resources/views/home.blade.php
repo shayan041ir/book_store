@@ -205,18 +205,18 @@
                     <div class="col-md-6 mb-3">
                         <div class="search-bar">
                             <input type="text" name="search" id="search-input" placeholder="جستجوی کتاب..."
-                                   value="{{ request('search') }}">
+                                value="{{ request('search') }}">
                             <button type="submit" id="search-button">جستجو</button>
                         </div>
                     </div>
-            
+
                     <!-- فیلتر دسته‌بندی -->
                     <div class="col-md-6 mb-3">
                         <select name="category" id="filter-category">
                             <option value="all">همه دسته‌ها</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" 
-                                        {{ request('category') == $category->id ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}"
+                                    {{ request('category') == $category->id ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -225,7 +225,7 @@
                     </div>
                 </div>
             </form>
-            
+
             <div class="row">
                 @forelse ($books as $book)
                     <div class="col-md-3">
@@ -252,70 +252,75 @@
         </div>
     </section>
     <script>
-        document.getElementById('search-button').addEventListener('click', function () {
+        document.getElementById('search-button').addEventListener('click', function() {
             document.querySelector('form').submit();
         });
-    
-        document.getElementById('filter-button').addEventListener('click', function () {
+
+        document.getElementById('filter-button').addEventListener('click', function() {
             document.querySelector('form').submit();
         });
     </script>
-    
+
     <!-- نویسندگان -->
     <section id="authors" class="py-5">
         <div class="container">
             <h2 class="text-center">نویسندگان</h2>
-            @foreach ($authors as $author)
-                <div class="row text-center">
+            <div class="row text-center">
+                @foreach ($authors as $author)
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <div class="card-body">
-                                <img src="{{ asset('storage/' . $author->image) }}" alt="author Image"
-                                    width="50">
-                                <h5 class="card-title">{{ $author->name }}</h5>
-                            </div>
+                            <a href="{{ route('author.show', $author->id) }}" class="text-decoration-none text-dark">
+                                <div class="card-body">
+                                    <img src="{{ asset('storage/' . $author->image) }}" alt="author Image"
+                                        width="50">
+                                    <h5 class="card-title">{{ $author->name }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
-            @endforeach
-        </div>
-
+                @endforeach
+            </div>
         </div>
     </section>
 
     <!-- مترجمان -->
-    <section id="authors" class="py-5">
+    <section id="translators" class="py-5">
         <div class="container">
             <h2 class="text-center">مترجمان</h2>
             <div class="row text-center">
                 @foreach ($translators as $translator)
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <div class="card-body">
-                                <img src="{{ asset('storage/' . $translator->image) }}" alt="translator Image"
-                                    width="50">
-                                <h5 class="card-title">{{ $translator->name }}</h5>
-                            </div>
+                            <a href="{{ route('translator.show', $translator->id) }}"
+                                class="text-decoration-none text-dark">
+                                <div class="card-body">
+                                    <img src="{{ asset('storage/' . $translator->image) }}" alt="translator Image"
+                                        width="50">
+                                    <h5 class="card-title">{{ $translator->name }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
     </section>
 
     <!-- ناشران -->
-    <section id="authors" class="py-5">
+    <section id="publishers" class="py-5">
         <div class="container">
             <h2 class="text-center">ناشران</h2>
             <div class="row text-center">
                 @foreach ($publishers as $publisher)
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <div class="card-body">
-                                <img src="{{ asset('storage/' . $publisher->image) }}" alt="publisher Image"
-                                    width="50">
-                                <h5 class="card-title">{{ $publisher->name }}</h5>
-                            </div>
+                            <a href="{{ route('publisher.show', $publisher->id) }}" class="text-decoration-none text-dark">
+                                <div class="card-body">
+                                    <img src="{{ asset('storage/' . $publisher->image) }}" alt="publisher Image"
+                                        width="50">
+                                    <h5 class="card-title">{{ $publisher->name }}</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach
