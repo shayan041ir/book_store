@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Slider;
 use App\Models\Category;
 use App\Models\Publisher;
+use App\Models\Translator;
 
 
 class HomeControler extends Controller
@@ -22,6 +23,6 @@ class HomeControler extends Controller
         $translators = \App\Models\Translator::all();
         $publishers = \App\Models\Publisher::all();
 
-        return view('home', compact('sliders', 'books', 'categories','bestSellingBooks','authors','translators','publishers'));
-    }
+        return view('home', compact('sliders', 'books', 'categories', 'bestSellingBooks', 'authors', 'translators', 'publishers'));
+    }   
 }

@@ -77,6 +77,8 @@ Route::post('/cart/{id}', [CartController::class, 'addToCart'])->name('cart.add'
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
+Route::get('/books', [BookController::class, 'filter'])->name('books.filter');
+Route::get('/book/{id}', [BookController::class, 'show1'])->name('show.book');
 Route::get('/book/{id}', [BookController::class, 'show'])->name('book.show');
 
 Route::get('/payment', [CartController::class, 'payment'])->name('payment');

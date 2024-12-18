@@ -10,6 +10,11 @@
     {{-- لینک بوت استرپ برای لوگو ها --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css"
         rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
 </head>
@@ -67,26 +72,36 @@
 
 
     <!-- Hero Section -->
-    <section id="hero" class="bg-light text-center py-5">
-        <div class="container">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
-                </div>
-
-                <div class="carousel-inner">
-                    @foreach ($sliders as $slider)
-                        <div class="carousel-item active">
-                            <img src="{{ asset('storage/' . $slider->image_path) }}" alt="Slider Image" width="150">
-                        </div>
-                    @endforeach
-                </div>
+    <section id="hero-section" class="mb-5">
+        <div id="hero-section" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
+            style="height: 500px; width: 100%; max-width: 1200px; margin: 0 auto;">
+            <div class="carousel-inner">
+                @foreach ($sliders as $index => $slider)
+                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                        <img src="{{ Storage::url($slider->image_path) }}" class="d-block w-100" alt="Slider Image"
+                            style="height: 500px; object-fit: cover;">
+                        @if ($slider->book)
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>نام محصول: {{ $slider->book->name }}</h5>
+                                <a href="{{ route('book.show', $slider->book->id) }}" class="btn btn-primary">مشاهده
+                                    محصول</a>
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
             </div>
+
+            <!-- دکمه‌های هدایت -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#home-slider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">قبلی</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#home-slider" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">بعدی</span>
+            </button>
         </div>
+
     </section>
 
     <!-- Features Section -->
@@ -184,25 +199,33 @@
     <section id="books" class="py-5 bg-light">
         <div class="container">
             <h2 class="text-center mb-4">کتاب‌ها</h2>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text bg-white border-end-0" id="search-icon">
-                            <i class="bi bi-search text-secondary"></i>
-                        </span>
-                        <input type="text" class="form-control" id="search" placeholder="جستجوی کتاب">
+            <form method="GET" action="{{ route('books.filter') }}">
+                <div class="row">
+                    <!-- جستجو -->
+                    <div class="col-md-6 mb-3">
+                        <div class="search-bar">
+                            <input type="text" name="search" id="search-input" placeholder="جستجوی کتاب..."
+                                   value="{{ request('search') }}">
+                            <button type="submit" id="search-button">جستجو</button>
+                        </div>
+                    </div>
+            
+                    <!-- فیلتر دسته‌بندی -->
+                    <div class="col-md-6 mb-3">
+                        <select name="category" id="filter-category">
+                            <option value="all">همه دسته‌ها</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" 
+                                        {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button type="submit" id="filter-button">اعمال فیلتر</button>
                     </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <select class="form-select" id="filter">
-                        <option value="all">همه دسته‌ها</option>
-                        @foreach ($categories as $Category)
-                            <option value="{{ $Category->id }}">{{ $Category->name }}</option>
-                        @endforeach
-                    </select>
-                    {{-- <button id="filter-button">اعمال فیلتر</button>  --}}
-                </div>
-            </div>
+            </form>
+            
             <div class="row">
                 @forelse ($books as $book)
                     <div class="col-md-3">
@@ -228,7 +251,16 @@
             </div>
         </div>
     </section>
-
+    <script>
+        document.getElementById('search-button').addEventListener('click', function () {
+            document.querySelector('form').submit();
+        });
+    
+        document.getElementById('filter-button').addEventListener('click', function () {
+            document.querySelector('form').submit();
+        });
+    </script>
+    
     <!-- نویسندگان -->
     <section id="authors" class="py-5">
         <div class="container">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Slider;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
@@ -72,9 +73,10 @@ class BookController extends Controller
         $book->save();
 
         // اتصال دسته‌بندی‌ها
-        if ($request->categories) {
-            $book->categories()->attach($request->categories);
+        if ($request->category_id) {
+            $book->categories()->attach($request->category_id);
         }
+        
 
         return redirect()->route('admin.dashboard')->with('success', 'کتاب با موفقیت اضافه شد');
     }
@@ -102,4 +104,46 @@ class BookController extends Controller
         return view('template.book-detailes', compact('book'));
     }
 
+    public function filter(Request $request)
+    {
+        $query = Book::query();
+        
+        
+        $sliders = \App\Models\Slider::all();
+        $bestSellingBooks = \App\Models\Book::where('is_best_seller', true)->get();
+        $authors = \App\Models\Author::all();
+        $translators = \App\Models\Translator::all();
+        $publishers = \App\Models\Publisher::all();
+
+        // اعمال جستجو
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('author', 'like', '%' . $request->search . '%');
+        }
+    
+        // اعمال فیلتر دسته‌بندی
+        if ($request->has('category') && $request->category !== 'all') {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('categories.id', $request->category);
+            });            
+        }
+        
+        // دریافت لیست کتاب‌ها
+        $books = $query->get();
+    
+        // دریافت لیست دسته‌بندی‌ها
+        $categories = Category::all();
+    
+        // بازگرداندن ویو با نتایج
+        return view('home', compact('books', 'categories','sliders','bestSellingBooks', 'authors', 'translators', 'publishers'));
+    }
+
+    public function show1($id)
+    {
+        // یافتن کتاب بر اساس شناسه
+        $book = Book::findOrFail($id);
+
+        // ارسال داده‌ها به ویو
+        return view('home', compact('book'));
+    }
 }

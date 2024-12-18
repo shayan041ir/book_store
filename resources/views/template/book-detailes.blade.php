@@ -145,7 +145,7 @@
                 <!-- پیام برای کاربران غیر وارد شده -->
                 <p class="text-danger">برای خرید این محصول ابتدا وارد حساب کاربری خود شوید یا ثبت نام کنید.</p>
                 <a href="{{ route('login') }}" class="btn btn-success">ورود</a>
-                <a href="{{ route('singup') }}" class="btn btn-info">ثبت نام</a>
+                <a href="{{ route('signup-form') }}" class="btn btn-info">ثبت نام</a>
             @endif
         </div>
     </div>
@@ -169,13 +169,13 @@
             <!-- پیام برای کاربران غیر وارد شده -->
             <p class="text-danger">برای ثبت نظر ابتدا وارد حساب کاربری خود شوید یا ثبت نام کنید.</p>
             <a href="{{ route('login') }}" class="btn btn-success">ورود</a>
-            <a href="{{ route('singup') }}" class="btn btn-info">ثبت نام</a>
+            <a href="{{ route('signup-form') }}" class="btn btn-info">ثبت نام</a>
         @endif
     </div>
     <div>
         @forelse ($book->comments->where('is_approved', true) as $comment)
             <div class="border p-3 mb-2 rounded shadow-sm">
-                <strong>{{ $comment->user->name }}</strong> گفت:
+                <strong>{{ $comment->user->name ?? 'مهمان'}}</strong> گفت:
                 <p>{{ $comment->content }}</p>
                 <small class="text-muted">در {{ $comment->created_at->format('Y-m-d H:i') }}</small>
             </div>
