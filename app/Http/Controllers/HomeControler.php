@@ -17,7 +17,7 @@ class HomeControler extends Controller
     {
         $sliders = \App\Models\Slider::all();
         $categories = \App\Models\Category::all();
-        $books = \App\Models\Book::all();; // لیست محصولات برای لینک‌دادن
+        $books = \App\Models\Book::all(); // لیست محصولات برای لینک‌دادن
         $bestSellingBooks = \App\Models\Book::where('is_best_seller', true)->get();
         $authors = \App\Models\Author::all();
         $translators = \App\Models\Translator::all();
@@ -42,5 +42,13 @@ class HomeControler extends Controller
     {
         $publisher = Publisher::findOrFail($id);
         return view('publishers.show', compact('publisher'));
+    }
+
+
+    public function show1001()
+    {
+        $bestSellingBooks = \App\Models\Book::where('is_1001_books', true)->get();
+        $books = \App\Models\Book::all();
+        return view('template.section1001',compact('bestSellingBooks','books'));
     }
 }

@@ -52,6 +52,11 @@
     </label>
     <br>
 
+    <label>
+        <input type="checkbox" name="is_1001_books" value="1">1001 کتاب 
+    </label>
+    <br>
+
     <button type="submit">افزودن کتاب</button>
 </form>
 

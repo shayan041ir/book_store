@@ -22,54 +22,7 @@
 <body>
 
     <!-- Header -->
-    <header class="bg-primary text-white py-3 shadow-sm">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="h3">کتاب‌نگار</h1>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a href="#hero" class="nav-link text-white">خانه</a></li>
-                    <li class="nav-item"><a href="#books" class="nav-link text-white">کتاب‌ها</a></li>
-                    <li class="nav-item"><a href="#authors" class="nav-link text-white">نویسندگان</a></li>
-                    <li class="nav-item"><a href="{{ route('cart.view') }}" class="nav-link text-white">سبد خرید</a>
-                    </li>
-
-                    <!-- اگر کاربر یا ادمین لاگین نکرده -->
-                    @guest('web')
-                        @guest('admin')
-                            <li class="nav-item"><a href="{{ route('signup-form') }}" class="nav-link text-white">ثبت نام</a>
-                            </li>
-                            <li class="nav-item"><a href="{{ route('login-form') }}" class="nav-link text-white">ورود</a></li>
-                        @endguest
-                    @endguest
-
-                    <!-- اگر کاربر لاگین کرده -->
-                    @auth('web')
-                        <li class="nav-item"><a href="{{ route('user.dashboard') }}" class="nav-link text-white">داشبورد</a>
-                        </li>
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-link nav-link text-white">خروج</button>
-                            </form>
-                        </li>
-                    @endauth
-
-                    <!-- اگر ادمین لاگین کرده -->
-                    @auth('admin')
-                        <li class="nav-item"><a href="{{ route('admin.dashboard') }}" class="nav-link text-white">پنل
-                                مدیریت</a></li>
-                        <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-link nav-link text-white">خروج</button>
-                            </form>
-                        </li>
-                    @endauth
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    @include('template.header')
 
     <!-- Hero Section -->
     <section id="hero-section" class="mb-5">
@@ -185,7 +138,7 @@
                 <div class="col-12">
                     <h2>1001 رمانی که باید قبل از مرگ بخوانید</h2>
                     <p>تا 20% تخفیف ویژه</p>
-                    <a href="#" class="btn btn-custom">مشاهده لیست کتاب‌ها</a>
+                    <a href="{{ route('1001books') }}" class="btn btn-custom">مشاهده لیست کتاب‌ها</a>
                 </div>
             </div>
             <!-- نشان تخفیف -->
@@ -342,64 +295,7 @@
 
 
     <!-- Footer -->
-    <footer class="bg-dark text-white pt-4">
-        <div class="container">
-            <div class="row">
-                <!-- بخش لوگو و توضیحات کوتاه -->
-                <div class="col-md-4 mb-3">
-                    <h5 class="text-uppercase">فروشگاه کتاب شما</h5>
-                    <p class="small">
-                        هدف ما ارائه بهترین کتاب‌ها در سریع‌ترین زمان ممکن است.
-                        <br>از حمایت شما سپاسگزاریم.
-                    </p>
-                    <img src="logo.png" alt="لوگو فروشگاه" class="img-fluid mt-2" style="width: 150px;">
-                </div>
-
-
-                <!-- خدمات مشتریان -->
-                <div class="col-md-2 mb-3">
-                    <h5 class="text-uppercase">خدمات مشتریان</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-white text-decoration-none small">درباره ما</a></li>
-                        <li><a href="#" class="text-white text-decoration-none small">تماس با ما</a></li>
-                        <li><a href="#" class="text-white text-decoration-none small">سؤالات متداول</a></li>
-                        <li><a href="#" class="text-white text-decoration-none small">شرایط و قوانین</a></li>
-                    </ul>
-                </div>
-
-
-                <!-- اطلاعات تماس -->
-                <div class="col-md-3 mb-3">
-                    <h5 class="text-uppercase">اطلاعات تماس</h5>
-                    <p class="small mb-1"><i class="bi bi-geo-alt-fill"></i> تهران، خیابان انقلاب، پلاک 12</p>
-                    <p class="small mb-1"><i class="bi bi-telephone-fill"></i> 021-12345678</p>
-                    <p class="small"><i class="bi bi-envelope-fill"></i> info@bookstore.com</p>
-                </div>
-
-
-                <!-- نماد اعتماد و رسانه‌ها -->
-                <div class="col-md-3">
-                    <h6>نماد اعتماد الکترونیکی</h6>
-                    <div class="trust-badge">
-                        <img src="https://via.placeholder.com/100x100" alt="نماد اعتماد">
-                    </div>
-                    <h6 class="mt-3">رسانه‌های دیجیتال</h6>
-                    <div class="trust-badge">
-                        <img src="https://via.placeholder.com/100x100" alt="رسانه دیجیتال">
-                    </div>
-                </div>
-
-
-            </div>
-            <!-- کپی‌رایت -->
-            <div class="row mt-3 border-top pt-3">
-                <div class="col text-center">
-                    <p class="small mb-0">&copy; 2024 فروشگاه کتاب شما. تمامی حقوق محفوظ است.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    @include('template.footer')
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

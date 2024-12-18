@@ -99,3 +99,17 @@ Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('ad
 Route::get('/author/{id}', [HomeControler::class, 'show_author'])->name('author.show');
 Route::get('/translator/{id}', [HomeControler::class, 'show_translator'])->name('translator.show');
 Route::get('/publisher/{id}', [HomeControler::class, 'show_publisher'])->name('publisher.show');
+
+
+// 1001 section
+Route::get('1001books',[HomeControler::class,'show1001'])->name('1001books');
+
+Route::get('aboutus', function () {
+    return view('template.abuotus');
+})->name('aboutus');
+
+Route::get('contactus', function () {
+    return view('template.contactus');
+})->name('contactus');
+
+

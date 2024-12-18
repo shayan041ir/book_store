@@ -31,6 +31,7 @@ class BookController extends Controller
             'category_id' => 'nullable|array',  // بررسی وجود دسته‌بندی در جدول
             'category_id.*' => 'exists:categories,id',  // بررسی وجود دسته‌بندی در جدول
             'is_best_seller' => 'nullable|boolean',
+            'is_1001_books' => 'nullable|boolean',
         ], [
             'image.required' => 'تصویر کتاب الزامی است.',
             'image.image' => 'فایل باید یک تصویر باشد.',
@@ -67,8 +68,9 @@ class BookController extends Controller
         $book->translator = $request->translator;
         $book->publisher = $request->publisher;
         $book->author = $request->author;
-        $book->publication_year     = $request->published_year;
+        $book->publication_year = $request->published_year;
         $book->is_best_seller = $request->has('is_best_seller') ? true : false; // چک کردن مقدار چک‌باکس
+        $book->is_1001_books = $request->has('is_1001_books') ? true : false;
 
         $book->save();
 
@@ -76,7 +78,7 @@ class BookController extends Controller
         if ($request->category_id) {
             $book->categories()->attach($request->category_id);
         }
-        
+
 
         return redirect()->route('admin.dashboard')->with('success', 'کتاب با موفقیت اضافه شد');
     }
@@ -107,8 +109,8 @@ class BookController extends Controller
     public function filter(Request $request)
     {
         $query = Book::query();
-        
-        
+
+
         $sliders = \App\Models\Slider::all();
         $bestSellingBooks = \App\Models\Book::where('is_best_seller', true)->get();
         $authors = \App\Models\Author::all();
@@ -118,24 +120,24 @@ class BookController extends Controller
         // اعمال جستجو
         if ($request->has('search') && !empty($request->search)) {
             $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('author', 'like', '%' . $request->search . '%');
+                ->orWhere('author', 'like', '%' . $request->search . '%');
         }
-    
+
         // اعمال فیلتر دسته‌بندی
         if ($request->has('category') && $request->category !== 'all') {
             $query->whereHas('categories', function ($q) use ($request) {
                 $q->where('categories.id', $request->category);
-            });            
+            });
         }
-        
+
         // دریافت لیست کتاب‌ها
         $books = $query->get();
-    
+
         // دریافت لیست دسته‌بندی‌ها
         $categories = Category::all();
-    
+
         // بازگرداندن ویو با نتایج
-        return view('home', compact('books', 'categories','sliders','bestSellingBooks', 'authors', 'translators', 'publishers'));
+        return view('home', compact('books', 'categories', 'sliders', 'bestSellingBooks', 'authors', 'translators', 'publishers'));
     }
 
     public function show1($id)
