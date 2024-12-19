@@ -18,6 +18,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>

@@ -24,12 +24,14 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'nullable|string|min:4|confirmed',
             'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|regex:/^\d{10,12}$/',
         ]);
         $user = Auth::user();
 
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->address = $validatedData['address'] ?? $user->address;
+        $user->phone = $validatedData['phone'] ?? $user->phone;
         
         // به‌روزرسانی رمز عبور در صورت وجود
         if (!empty($validatedData['password'])) {

@@ -7,6 +7,46 @@ body {
     color: #333;
 }
 
+
+/* Hero Slider Styles */
+#hero-section {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#hero-section .carousel {
+    height: 100%;
+}
+
+#hero-section .carousel-inner {
+    height: 100%;
+}
+
+#hero-section .carousel-item {
+    height: 100%;
+}
+
+#hero-section img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+#hero-section .carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+
 a {
     color: inherit;
     /* یا یک رنگ مشخص برای لینک‌ها تعیین کنید */
@@ -25,6 +65,67 @@ a:hover {
     /* رنگ لینک‌ها هنگام هاور */
     text-decoration: underline;
     /* می‌توانید این خط را هم حذف کنید */
+}
+#books .book-card {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#books .book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-image {
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-image img {
+    max-height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.book-card .card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.book-card .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-card .author, .book-card .price {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.book-card .no-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f0f0f0;
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+}
+
+.book-card a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .container {
@@ -137,10 +238,6 @@ a:hover {
     animation: bounce 2s infinite;
 }
 
-.books {
-    background: #fff;
-    padding: 40px 0;
-}
 
 .search-filter {
     display: flex;
@@ -148,37 +245,6 @@ a:hover {
     margin-bottom: 20px;
 }
 
-.book-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-/* کارت کتاب */
-.card {
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card img {
-    transition: transform 0.3s ease;
-}
-
-.card:hover img {
-    transform: scale(1.1);
-}
-
-.card-title {
-    color: #31b0d5;
-    font-weight: bold;
-}
 
 /* سکشن قبل از فوتر */
 .pre-footer {

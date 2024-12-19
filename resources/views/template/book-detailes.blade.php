@@ -33,17 +33,32 @@
             <div class="col-md-6">
                 <div class="image-container">
                     <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
-                        class="img-fluid book-image">
+                        class="img-fluid book-image" style="max-width: 100%; height: auto; max-height: 400px; object-fit: contain;">
                 </div>
             </div>
             <div class="col-md-6">
-                <h2 class="mb-3">{{ $book->name }}</h2>
-                <p>{{ $book->description }}</p>
-                <p>{{ $book->author }}</p>
-                <p>{{ $book->translator }}</p>
-                <p>{{ $book->publisher }}</p>
-                <p>{{ $book->publication_year }}</p>
-                <p>{{ $book->page_count }}</p>
+                <div class="book-details">
+                    <h2 class="mb-3 text-primary">{{ $book->name }}</h2>
+                    <p class="text-muted">{{ $book->description }}</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item">
+                            <strong>نویسنده:</strong> {{ $book->author }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>مترجم:</strong> {{ $book->translator ?? 'ندارد' }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>ناشر:</strong> {{ $book->publisher }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>سال انتشار:</strong> {{ $book->publication_year }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>تعداد صفحات:</strong> {{ $book->page_count }} صفحه
+                        </li>
+                    </ul>
+                </div>
+                
                 <h3 class="text-primary">قیمت: {{ number_format($book->price) }} تومان</h3>
                 <p>موجودی: <strong>{{ $book->stock }}</strong> عدد</p>
 

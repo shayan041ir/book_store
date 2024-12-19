@@ -99,8 +99,8 @@
 
 
     <!--کتاب‌ها پرفروش-->
-    <section id="books" class="py-5 bg-light">
-        <div class="container">
+    <div class="container">
+        <section id="books" class="py-5 bg-light">
             <h2 class="text-center mb-4">کتاب‌ها پرفروش</h2>
             <div class="row">
             </div>
@@ -112,8 +112,8 @@
                                 <a href="{{ route('book.show', ['id' => $book->id]) }}">
                                     <div>
                                         @if ($book->image)
-                                            <img src="{{ asset('storage/' . $book->image) }}"
-                                                alt="{{ $book->name }}" width="50">
+                                            <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
+                                                style="max-width: 100%; max-height: 150px; object-fit: contain;">
                                         @else
                                             <span>بدون تصویر</span>
                                         @endif
@@ -127,8 +127,8 @@
                     </div>
                 @endforeach
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- سکشن "1001 کتابی که باید بخوانید" -->
     <section class="section-1001-books ">
@@ -149,8 +149,8 @@
     </section>
 
     <!--کتاب‌ها -->
-    <section id="books" class="py-5 bg-light">
-        <div class="container">
+    <div class="container">
+        <section id="books" class="py-5 bg-light">
             <h2 class="text-center mb-4">کتاب‌ها</h2>
             <form method="GET" action="{{ route('books.filter') }}">
                 <div class="row">
@@ -187,7 +187,7 @@
                                 <a href="{{ route('book.show', ['id' => $book->id]) }}">
                                     @if ($book->image)
                                         <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->name }}"
-                                            width="50">
+                                            style="max-width: 100%; max-height: 150px; object-fit: contain;">
                                     @else
                                         <span>بدون تصویر</span>
                                     @endif
@@ -202,8 +202,8 @@
                     <p>هیچ محصولی یافت نشد.</p>
                 @endforelse
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
     <script>
         document.getElementById('search-button').addEventListener('click', function() {
             document.querySelector('form').submit();
@@ -267,7 +267,8 @@
                 @foreach ($publishers as $publisher)
                     <div class="col-md-4">
                         <div class="card shadow">
-                            <a href="{{ route('publisher.show', $publisher->id) }}" class="text-decoration-none text-dark">
+                            <a href="{{ route('publisher.show', $publisher->id) }}"
+                                class="text-decoration-none text-dark">
                                 <div class="card-body">
                                     <img src="{{ asset('storage/' . $publisher->image) }}" alt="publisher Image"
                                         width="50">

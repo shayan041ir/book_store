@@ -63,7 +63,8 @@ class AdminController extends Controller
         $admin->save();
         $msj = "Admin added successfully!";
         $admins = Admin::all();
-        return view('admin.admin-dashboard', compact('admins'))->with('msj');
+        $users = User::all();
+        return view('admin.admin-dashboard', compact('admins','users'))->with('msj');
     }
 
     public function adminupdate(Request $request)
