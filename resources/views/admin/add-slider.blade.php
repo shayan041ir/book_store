@@ -1,23 +1,29 @@
 <div class="add-admin">
-    <h2>مدیریت اسلایدر</h2>
 
-    <form action="{{ route('slider.upload') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <label for="book_id">کتاب مرتبط:</label>
-        <select name="book_id" id="book_id" required>
-            @foreach ($books as $book)
-                <option value="{{ $book->id }}">{{ $book->name }}</option>
-            @endforeach
-        </select>
-    
-        <label for="title">عنوان اسلایدر:</label>
-        <input type="text" name="title" id="title" required>
-    
-        <label for="image_path">عکس:</label>
-        <input type="file" name="image_path" id="image_path" required>
-    
-        <button type="submit" class="btn btn-success">آپلود اسلاید</button>
-    </form>
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">مدیریت اسلایدر</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('slider.upload') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <label for="book_id">کتاب مرتبط:</label>
+                <select name="book_id" id="book_id" required>
+                    @foreach ($books as $book)
+                        <option value="{{ $book->id }}">{{ $book->name }}</option>
+                    @endforeach
+                </select>
+                <br>
+                <label for="title">عنوان اسلایدر:</label>
+                <input type="text" name="title" id="title" required>
+
+                <label for="image_path">عکس:</label>
+                <input type="file" name="image_path" id="image_path" required>
+
+                <button type="submit" class="btn btn-success">آپلود اسلاید</button>
+            </form>
+        </div>
+    </div>
 
     <h3>اسلایدهای فعلی:</h3>
 

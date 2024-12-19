@@ -1,44 +1,55 @@
 <div class="add-admin">
-    <h1>افزودن ادمین</h1>
     @if (session('msj'))
         <h6>{{ session('msj') }}</h6>
     @endif
 
-    <form action="{{ route('admin.addadmin') }}" method="post">
-        @csrf
-        @if ($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <input type="text" name="name" placeholder="name">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <button type="submit" class="btn btn-success">افزودن</button>
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">افزودن ادمین</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('admin.addadmin') }}" method="post">
+                @csrf
+                @if ($errors->any())
+                    <div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <input type="text" name="name" placeholder="name">
+                <input type="email" name="email" placeholder="email">
+                <input type="password" name="password" placeholder="password">
+                <button type="submit" class="btn btn-success">افزودن</button>
 
-    </form>
+            </form>
+        </div>
+    </div>
+    
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">ویرایش اطلاعات ادمین</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('admin.update') }}" method="POST" class="needs-validation">
+                @csrf
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-    <h2>ویرایش اطلاعات ادمین</h2>
-    <form action="{{ route('admin.update') }}" method="POST">
-        @csrf
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+                @method('PUT')
 
-        @method('PUT')
+                <input type="text" id="name" name="name" placeholder="name" required>
+                <input type="password" id="password_confirmation"placeholder="password" name="password_confirmation">
+                <button type="submit" class="btn btn-success">ویرایش</button>
 
-        <input type="text" id="name" name="name" placeholder="name" required>
-        <input type="password" id="password_confirmation"placeholder="password" name="password_confirmation">
-        <button type="submit" class="btn btn-success">ویرایش</button>
-
-    </form>
-
+            </form>
+        </div>
+    </div>
     <h1>حذف ادمین</h1>
     <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
         <thead>

@@ -1,25 +1,32 @@
 <div class="add-admin">
-    <h1>افزودن کاربر</h1>
     @if (session('s'))
         <h6>{{ session('s') }}</h6>
     @endif
 
-    <form action="{{ route('admin.adduser') }}" method="post">
-        @csrf
-        @if ($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <input type="text" name="name" placeholder="name">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <button type="submit" class="btn btn-success">افزودن</button>
-    </form>
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">افزودن کاربر</h4>
+        </div>
+        <div class="card-body">
+
+            <form action="{{ route('admin.adduser') }}" method="post">
+                @csrf
+                @if ($errors->any())
+                    <div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <input type="text" name="name" placeholder="name">
+                <input type="email" name="email" placeholder="email">
+                <input type="password" name="password" placeholder="password">
+                <button type="submit" class="btn btn-success">افزودن</button>
+            </form>
+        </div>
+    </div>
 
 
     <h1>حذف کاربر</h1>
@@ -39,20 +46,22 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <form action="{{ route('user.delete', $user->id) }}" method="POST" onsubmit="return confirm('آیا مطمئن هستید که می‌خواهید {{ $user->name }} را حذف کنید؟');">
+                        <form action="{{ route('user.delete', $user->id) }}" method="POST"
+                            onsubmit="return confirm('آیا مطمئن هستید که می‌خواهید {{ $user->name }} را حذف کنید؟');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" style="background-color: red; color: white; padding: 5px 10px;">حذف کاربر</button>
+                            <button type="submit" class="btn btn-danger"
+                                style="background-color: red; color: white; padding: 5px 10px;">حذف کاربر</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    
+
     <script>
         function confirmDelete(userName) {
             return confirm(`آیا مطمئن هستید که می‌خواهید کاربر ${userName} را حذف کنید؟`);
         }
-    </script>    
+    </script>
 </div>

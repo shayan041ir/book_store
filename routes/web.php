@@ -40,7 +40,9 @@ Route::prefix('admin')->group(function () {
 
         Route::get('dashboard-addbook-page', [BookController::class, 'index'])->name('books.page');
         Route::post('dashboard-addbook', [BookController::class, 'store'])->name('books.store');
-        Route::delete('dashboard-deletebook//{id}', [BookController::class, 'destroy'])->name('book.delete');
+        Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('book.edit');
+        Route::put('/books/{book}', [BookController::class, 'update'])->name('book.update');
+        Route::delete('dashboard-deletebook/{id}', [BookController::class, 'destroy'])->name('book.delete');
 
         Route::get('/dashboard.show-category', [CategoryController::class, 'create'])->name('categories.show');
         Route::delete('/dashboard.delete-category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
