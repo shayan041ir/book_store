@@ -170,10 +170,12 @@ a:hover {
     display: flex;
     justify-content: space-around;
     background: #e65c00;
-    color: #fff;
+    color: #ffffff;
     padding: 20px 0;
 }
-
+#b1{
+    background-color: #76b8ff;
+}
 .feature {
     text-align: center;
     flex: 1;

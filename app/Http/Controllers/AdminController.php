@@ -159,7 +159,7 @@ class AdminController extends Controller
     public function uploadSlider(Request $request)
     {
         $request->validate([
-            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_path' => 'required|image|mimes:jpeg,png,jpg,gif',
             'book_id' => 'nullable|exists:books,id',
             'title' => 'required|string|max:255',
         ]);

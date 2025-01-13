@@ -62,7 +62,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-3">
-                    <div class="card shadow">
+                    <div class="card shadow" id="b1">
                         <div class="card-body">
                             <h5 class="card-title">ارسال رایگان</h5>
                             <p class="card-text">ارسال رایگان به سراسر کشور</p>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card shadow">
+                    <div class="card shadow" id="b1">
                         <div class="card-body">
                             <h5 class="card-title">تنوع گسترده</h5>
                             <p class="card-text">بیش از ۱۰,۰۰۰ عنوان کتاب</p>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card shadow">
+                    <div class="card shadow" id="b1">
                         <div class="card-body">
                             <h5 class="card-title">قیمت مناسب</h5>
                             <p class="card-text">کتاب‌های با تخفیف ویژه</p>
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card shadow">
+                    <div class="card shadow" id="b1">
                         <div class="card-body">
                             <h5 class="card-title">پشتیبانی ۲۴/۷</h5>
                             <p class="card-text">پاسخگویی سریع به سوالات شما</p>

@@ -19,7 +19,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // حداکثر حجم 2MB
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif', // حداکثر حجم 2MB
             'title' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'page_count' => 'required|integer|min:1',
@@ -73,6 +73,7 @@ class BookController extends Controller
         $book->is_1001_books = $request->has('is_1001_books') ? true : false;
 
         $book->save();
+
 
         // اتصال دسته‌بندی‌ها
         if ($request->category_id) {

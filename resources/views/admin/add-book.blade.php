@@ -29,8 +29,7 @@
 
                 <div class="form-group">
                     <label for="stock">موجودی:</label><br>
-                    <input type="number" id="stock" name="stock" value="{{ old('stock') }}" required>
-
+                    <input type="number" id="stock" name="stock" required>
                 </div>
 
                 <div class="form-group">
@@ -136,50 +135,42 @@
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title"
-                        required>
+                    <input type="text" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" name="price"
-                        >
+                    <input type="text" class="form-control" id="price" name="price">
                 </div>
 
                 <div class="form-group">
                     <label for="page_count">Page Count</label>
-                    <input type="number" class="form-control" id="page_count" name="page_count"
-                       >
+                    <input type="number" class="form-control" id="page_count" name="page_count">
                 </div>
 
                 <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="number" class="form-control" id="stock" name="stock"
-                        >
+                    <input type="number" class="form-control" id="stock" name="stock">
                 </div>
 
                 <div class="form-group">
                     <label for="translator">Translator</label>
-                    <input type="text" class="form-control" id="translator" name="translator"
-                        >
+                    <input type="text" class="form-control" id="translator" name="translator">
                 </div>
 
                 <div class="form-group">
                     <label for="publisher">Publisher</label>
-                    <input type="text" class="form-control" id="publisher" name="publisher"
-                       >
+                    <input type="text" class="form-control" id="publisher" name="publisher">
                 </div>
 
                 <div class="form-group">
                     <label for="author">Author</label>
-                    <input type="text" class="form-control" id="author" name="author"
-                        >
+                    <input type="text" class="form-control" id="author" name="author">
                 </div>
 
                 <div class="form-group">
                     <label for="published_year">Published Year</label>
-                    <input type="number" class="form-control" id="published_year" name="published_year"
-                     >
+                    <input type="number" class="form-control" id="published_year" name="published_year">
                 </div>
 
                 <div class="form-group">
@@ -191,7 +182,7 @@
                     <label for="category_id">Categories</label>
                     <select multiple class="form-control" id="category_id" name="category_id[]">
                         @foreach ($categories as $category)
-                            <option 
+                            <option
                                 {{ in_array($category->id, $book->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
@@ -200,12 +191,12 @@
                 </div>
 
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="is_best_seller" name="is_best_seller" >
+                    <input type="checkbox" class="form-check-input" id="is_best_seller" name="is_best_seller">
                     <label class="form-check-label" for="is_best_seller">Best Seller</label>
                 </div>
 
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="is_1001_books" name="is_1001_books" >
+                    <input type="checkbox" class="form-check-input" id="is_1001_books" name="is_1001_books">
                     <label class="form-check-label" for="is_1001_books">1001 Books</label>
                 </div>
 
@@ -214,4 +205,3 @@
         </div>
     </div>
 </div>
-
