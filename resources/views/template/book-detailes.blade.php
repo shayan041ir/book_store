@@ -80,7 +80,7 @@
                 @else
                     <!-- پیام برای کاربران غیر وارد شده -->
                     <p class="text-danger">برای خرید این محصول ابتدا وارد حساب کاربری خود شوید یا ثبت نام کنید.</p>
-                    <a href="{{ route('login') }}" class="btn btn-success">ورود</a>
+                    <a href="{{ route('login-form') }}" class="btn btn-success">ورود</a>
                     <a href="{{ route('signup-form') }}" class="btn btn-info">ثبت نام</a>
                 @endif
             </div>

@@ -130,56 +130,56 @@
             <h3>Edit Book</h3>
         </div>
         <div class="card-body">
-            <form action="{{ route('book.update', $book->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('book.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" name="title"
-                        value="{{ $book->name }}" required>
+                        required>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Price</label>
                     <input type="text" class="form-control" id="price" name="price"
-                        value="{{ $book->price }}" required>
+                        >
                 </div>
 
                 <div class="form-group">
                     <label for="page_count">Page Count</label>
                     <input type="number" class="form-control" id="page_count" name="page_count"
-                        value="{{ $book->page_count }}" required>
+                       >
                 </div>
 
                 <div class="form-group">
                     <label for="stock">Stock</label>
                     <input type="number" class="form-control" id="stock" name="stock"
-                        value="{{ $book->stock }}" required>
+                        >
                 </div>
 
                 <div class="form-group">
                     <label for="translator">Translator</label>
                     <input type="text" class="form-control" id="translator" name="translator"
-                        value="{{ $book->translator }}" required>
+                        >
                 </div>
 
                 <div class="form-group">
                     <label for="publisher">Publisher</label>
                     <input type="text" class="form-control" id="publisher" name="publisher"
-                        value="{{ $book->publisher }}" required>
+                       >
                 </div>
 
                 <div class="form-group">
                     <label for="author">Author</label>
                     <input type="text" class="form-control" id="author" name="author"
-                        value="{{ $book->author }}" required>
+                        >
                 </div>
 
                 <div class="form-group">
                     <label for="published_year">Published Year</label>
                     <input type="number" class="form-control" id="published_year" name="published_year"
-                        value="{{ $book->publication_year }}" required>
+                     >
                 </div>
 
                 <div class="form-group">
@@ -191,7 +191,7 @@
                     <label for="category_id">Categories</label>
                     <select multiple class="form-control" id="category_id" name="category_id[]">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}"
+                            <option 
                                 {{ in_array($category->id, $book->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
@@ -200,14 +200,12 @@
                 </div>
 
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="is_best_seller" name="is_best_seller" value="1"
-                        {{ $book->is_best_seller ? 'checked' : '' }}>
+                    <input type="checkbox" class="form-check-input" id="is_best_seller" name="is_best_seller" >
                     <label class="form-check-label" for="is_best_seller">Best Seller</label>
                 </div>
 
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="is_1001_books" name="is_1001_books" value="1"
-                        {{ $book->is_1001_books ? 'checked' : '' }}>
+                    <input type="checkbox" class="form-check-input" id="is_1001_books" name="is_1001_books" >
                     <label class="form-check-label" for="is_1001_books">1001 Books</label>
                 </div>
 

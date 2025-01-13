@@ -90,20 +90,23 @@ class BookController extends Controller
 
         return view('admin.add-book', compact('book', 'categories'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $book = Book::findOrFail($id);
-
+        // $book = Book::findOrFail($id);
+        $book = Book::where('name', $request->input('title'))->first();
+        if (!$book) {
+            return redirect()->back()->withErrors(['msg' => 'محصولی با این نام یافت نشد.']);
+        }
         $request->validate([
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // حداکثر حجم 2MB
             'title' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'page_count' => 'required|integer|min:1',
-            'stock' => 'required|integer|min:0',
-            'translator' => 'required|string|max:255',
-            'publisher' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'published_year' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
+            'price' => 'nullable|numeric|min:0',
+            'page_count' => 'nullable|integer|min:1',
+            'stock' => 'nullable|integer|min:0',
+            'translator' => 'nullable|string|max:255',
+            'publisher' => 'nullable|string|max:255',
+            'author' => 'nullable|string|max:255',
+            'published_year' => 'nullable|integer|digits:4|min:1900|max:' . date('Y'),
             'category_id' => 'nullable|array',  // بررسی وجود دسته‌بندی در جدول
             'category_id.*' => 'exists:categories,id',  // بررسی وجود دسته‌بندی در جدول
             'is_best_seller' => 'nullable|boolean',
@@ -121,28 +124,37 @@ class BookController extends Controller
             $book->image = $imagePath;
         }
 
-        // به‌روزرسانی فیلدهای کتاب
-        $book->name = $request->title;
-        $book->price = $request->price;
-        $book->page_count = $request->page_count;
-        $book->stock = $request->stock;
-        $book->translator = $request->translator;
-        $book->publisher = $request->publisher;
-        $book->author = $request->author;
-        $book->publication_year = $request->published_year;
-        $book->is_best_seller = $request->has('is_best_seller') ? true : false;
-        $book->is_1001_books = $request->has('is_1001_books') ? true : false;
+        // // به‌روزرسانی فیلدهای کتاب
+        // $book->name = $request->title;
+        // $book->price = $request->price;
+        // $book->page_count = $request->page_count;
+        // $book->stock = $request->stock;
+        // $book->translator = $request->translator;
+        // $book->publisher = $request->publisher;
+        // $book->author = $request->author;
+        // $book->publication_year = $request->published_year;
+        // $book->is_best_seller = $request->has('is_best_seller') ? true : false;
+        // $book->is_1001_books = $request->has('is_1001_books') ? true : false;
 
-        // ذخیره تغییرات
-        $book->save();
+        // // ذخیره تغییرات
+        // $book->save();
 
-        // به‌روزرسانی دسته‌بندی‌ها
-        if ($request->category_id) {
-            $book->categories()->sync($request->category_id);
-        } else {
-            $book->categories()->detach();
+        // // به‌روزرسانی دسته‌بندی‌ها
+        // if ($request->category_id) {
+        //     $book->categories()->sync($request->category_id);
+        // } else {
+        //     $book->categories()->detach();
+        // }
+
+        // به‌روزرسانی فیلدهایی که تغییر کرده‌اند
+        $data = $request->only(['name', 'price', 'stock', 'page_count', 'translator', 'publisher','author','published_year','is_best_seller','is_1001_books']);
+        foreach ($data as $key => $value) {
+            if ($value !== null) {
+                $book->$key = $value;
+            }
         }
 
+        $book->save();
         return redirect()->route('admin.dashboard')->with('success', 'کتاب با موفقیت به‌روزرسانی شد');
     }
 
