@@ -17,16 +17,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <script src="{{ asset('assets/js/scripts.js') }}" defer></script>
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap JS (با Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
 
     <!-- Header -->
     @include('template.header')
-
+    <br>
     <!-- Hero Section -->
     <section id="hero-section" class="mb-5">
-        <div id="hero-section" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
+        <div id="hero-section" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000"
             style="height: 500px; width: 100%; max-width: 1200px; margin: 0 auto;">
             <div class="carousel-inner">
                 @foreach ($sliders as $index => $slider)
@@ -45,16 +51,14 @@
             </div>
 
             <!-- دکمه‌های هدایت -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#home-slider" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#hero-section" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">قبلی</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#home-slider" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#hero-section" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">بعدی</span>
             </button>
-        </div>
-
     </section>
 
     <!-- Features Section -->

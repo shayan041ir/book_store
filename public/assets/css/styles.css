@@ -10,6 +10,7 @@ body {
 }
 
 /* Hero Slider Styles */
+/* Hero Slider Styles */
 #hero-section {
     position: relative;
     height: 500px;
@@ -18,14 +19,8 @@ body {
     margin: 0 auto;
 }
 
-#hero-section .carousel {
-    height: 100%;
-}
-
-#hero-section .carousel-inner {
-    height: 100%;
-}
-
+#hero-section .carousel,
+#hero-section .carousel-inner,
 #hero-section .carousel-item {
     height: 100%;
 }
@@ -47,26 +42,21 @@ body {
     color: #fff;
 }
 
-
-a {
-    color: inherit;
-    /* یا یک رنگ مشخص برای لینک‌ها تعیین کنید */
-    text-decoration: none;
-}
-
-/* برای تغییر رنگ لینک‌ها به یک رنگ خاص */
 a {
     color: #333;
-    /* به عنوان مثال، رنگ مشکی */
     text-decoration: none;
 }
 
 a:hover {
     color: #007bff;
-    /* رنگ لینک‌ها هنگام هاور */
     text-decoration: underline;
-    /* می‌توانید این خط را هم حذف کنید */
 }
+.carousel-control-prev,
+.carousel-control-next {
+    pointer-events: auto; /* مطمئن شوید که دکمه‌ها قابل کلیک هستند */
+    z-index: 10; /* مطمئن شوید که دکمه‌ها در بالای سایر عناصر قرار دارند */
+}
+
 #books .book-card {
     position: relative;
     overflow: hidden;
