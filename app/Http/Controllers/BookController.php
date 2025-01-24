@@ -109,7 +109,7 @@ class BookController extends Controller
             'author' => 'nullable|string|max:255',
             'published_year' => 'nullable|integer|digits:4|min:1900|max:' . date('Y'),
             'category_id' => 'nullable|array',  // بررسی وجود دسته‌بندی در جدول
-            'category_id.*' => 'exists:categories,id',  // بررسی وجود دسته‌بندی در جدول
+            'category_id.*' => 'nullable|exists:categories,id',  // بررسی وجود دسته‌بندی در جدول
             'is_best_seller' => 'nullable|boolean',
             'is_1001_books' => 'nullable|boolean',
         ]);
@@ -125,36 +125,20 @@ class BookController extends Controller
             $book->image = $imagePath;
         }
 
-        // // به‌روزرسانی فیلدهای کتاب
-        // $book->name = $request->title;
-        // $book->price = $request->price;
-        // $book->page_count = $request->page_count;
-        // $book->stock = $request->stock;
-        // $book->translator = $request->translator;
-        // $book->publisher = $request->publisher;
-        // $book->author = $request->author;
-        // $book->publication_year = $request->published_year;
-        // $book->is_best_seller = $request->has('is_best_seller') ? true : false;
-        // $book->is_1001_books = $request->has('is_1001_books') ? true : false;
-
-        // // ذخیره تغییرات
-        // $book->save();
-
-        // // به‌روزرسانی دسته‌بندی‌ها
-        // if ($request->category_id) {
-        //     $book->categories()->sync($request->category_id);
-        // } else {
-        //     $book->categories()->detach();
-        // }
+        // به‌روزرسانی دسته‌بندی‌ها
+        if ($request->category_id) {
+            $book->categories()->sync($request->category_id);
+        } else {
+            $book->categories()->detach();
+        }
 
         // به‌روزرسانی فیلدهایی که تغییر کرده‌اند
-        $data = $request->only(['name', 'price', 'stock', 'page_count', 'translator', 'publisher','author','published_year','is_best_seller','is_1001_books']);
+        $data = $request->only(['name', 'price', 'stock', 'page_count', 'translator', 'publisher', 'author', 'published_year', 'is_best_seller', 'is_1001_books']);
         foreach ($data as $key => $value) {
             if ($value !== null) {
                 $book->$key = $value;
             }
         }
-
         $book->save();
         return redirect()->route('admin.dashboard')->with('success', 'کتاب با موفقیت به‌روزرسانی شد');
     }

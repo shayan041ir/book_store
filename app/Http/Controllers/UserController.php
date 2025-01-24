@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $orders = Order::with('items.book')->get();
+        $orders = Order::with('items.book')->where('user_id', auth()->id())->get();
         return view('user.user-dashboard', compact('orders'));
     }
 

@@ -57,7 +57,7 @@
                     <label for="category_id">دسته‌بندی‌ها:</label><br>
                     <select id="category_id" name="category_id[]" multiple>
                         @foreach ($categories as $Category)
-                            <option value="{{ $Category->id }}">{{ $Category->name }}</option>
+                            <option >{{ $Category->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -182,8 +182,7 @@
                     <label for="category_id">Categories</label>
                     <select multiple class="form-control" id="category_id" name="category_id[]">
                         @foreach ($categories as $category)
-                            <option
-                                {{ in_array($category->id, $book->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
+                            <option value="{{$category->id}}">
                                 {{ $category->name }}
                             </option>
                         @endforeach

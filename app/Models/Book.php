@@ -13,7 +13,7 @@ class Book extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'book_category');
+        return $this->belongsToMany(Category::class, 'book_category', 'book_id', 'category_id');
     }
 
     // ارتباط با کامنت‌ها
@@ -29,9 +29,10 @@ class Book extends Model
     }
 
     // ارتباط با آیتم‌های سبد خرید
-    public function cartItems()
+    public function orderItems()
     {
-        return $this->hasMany(CartItem::class);
+        return $this->hasMany(OrderItem::class);
     }
+
 
 }

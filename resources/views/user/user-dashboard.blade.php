@@ -41,7 +41,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">داشبورد کاربر</a>
-            <button class="btn btn-outline-light" onclick="location.href='{{ route('home.page') }}';">بازگشت به خانه</button>
+            <button class="btn btn-outline-light" onclick="location.href='{{ route('home.page') }}';">بازگشت به
+                خانه</button>
         </div>
     </nav>
 
@@ -69,7 +70,8 @@
                             <tbody>
                                 @foreach (session('cart') as $id => $item)
                                     <tr>
-                                        <td><img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" width="50"></td>
+                                        <td><img src="{{ asset('storage/' . $item['image']) }}"
+                                                alt="{{ $item['name'] }}" width="50"></td>
                                         <td>{{ $item['name'] }}</td>
                                         <td>{{ $item['quantity'] }}</td>
                                         <td>{{ number_format($item['price']) }} تومان</td>
@@ -109,25 +111,29 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="name" class="form-label">نام کاربری:</label>
-                        <input type="text" id="name" name="name" value="{{ auth()->user()->name }}" class="form-control" required>
+                        <input type="text" id="name" name="name" value="{{ auth()->user()->name }}"
+                            class="form-control" required>
                         <div class="invalid-feedback">لطفاً نام کاربری را وارد کنید.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">ایمیل:</label>
-                        <input type="email" id="email" name="email" value="{{ auth()->user()->email }}" class="form-control" required>
+                        <input type="email" id="email" name="email" value="{{ auth()->user()->email }}"
+                            class="form-control" required>
                         <div class="invalid-feedback">لطفاً ایمیل معتبر وارد کنید.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="address" class="form-label">آدرس:</label>
-                        <input type="text" id="address" name="address" value="{{ auth()->user()->address }}" class="form-control" required>
+                        <input type="text" id="address" name="address" value="{{ auth()->user()->address }}"
+                            class="form-control" required>
                         <div class="invalid-feedback">لطفاً آدرس را وارد کنید.</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">شماره تلفن (اختیاری):</label>
-                        <input type="text" name="phone" id="phone" class="form-control" placeholder="شماره تلفن خود را وارد کنید" value="{{ old('phone', Auth::user()->phone) }}">
+                        <input type="text" name="phone" id="phone" class="form-control"
+                            placeholder="شماره تلفن خود را وارد کنید" value="{{ old('phone', Auth::user()->phone) }}">
                     </div>
 
                     <div class="mb-3">
@@ -137,7 +143,8 @@
 
                     <div class="mb-3">
                         <label for="password_confirmation" class="form-label">تأیید رمز عبور:</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">ویرایش</button>
@@ -172,7 +179,8 @@
                                         @endforeach
                                     </td>
                                     <td>{{ $order->items->sum('quantity') }}</td>
-                                    <td>{{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity)) }} تومان</td>
+                                    <td>{{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity)) }}
+                                        تومان</td>
                                     <td class="order-status" data-order-id="{{ $order->id }}">ارسال شده</td>
                                 </tr>
                             @endforeach

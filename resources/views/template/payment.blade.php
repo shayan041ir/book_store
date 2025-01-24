@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>درگاه پرداخت ملت</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // جلوگیری از ارسال فرم بلافاصله
+            alert("پرداخت با موفقیت انجام شد!"); // نمایش پیام
+            event.target.submit(); // ارسال فرم پس از نمایش پیام
+        }
+    </script>
     <style>
         body {
             font-family: 'Tahoma', sans-serif;
@@ -50,6 +61,16 @@
         .note {
             font-size: 0.9rem;
             color: #6c757d;
+        }
+
+        /* استایل جدید برای فیلد شماره کارت */
+        #card-number {
+            direction: ltr;
+            /* متن را چپ به راست نمایش می‌دهد */
+            text-align: left;
+            /* متن را به چپ تراز می‌کند */
+            font-family: 'Courier New', Courier, monospace;
+            /* فونت مناسب برای اعداد */
         }
     </style>
 </head>

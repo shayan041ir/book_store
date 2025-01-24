@@ -64,37 +64,55 @@ class AdminController extends Controller
         $msj = "Admin added successfully!";
         $admins = Admin::all();
         $users = User::all();
-        return view('admin.admin-dashboard', compact('admins','users'))->with('msj');
+        $books = Book::all();
+        $sliders = Slider::all();
+        $categories = Category::all();
+        $authors = Author::all();
+        $translators = Translator::all();
+        $publishers = Publisher::all();
+        $comments = Comment::where('is_approved', false)->get();        
+        $orders = Order::with(['user', 'items.book'])->get();
+        // محاسبه مجموع قیمت کل همه سفارش‌ها
+        $totalSales = $orders->sum(function ($order) {
+            return $order->items->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+        });
+        return view('admin.admin-dashboard', compact('admins', 'users', 'books', 'sliders', 'categories', 'authors','translators','publishers','comments', 'orders' , 'totalSales'))->with('msj');
     }
 
     public function adminupdate(Request $request)
     {
         // اعتبارسنجی اطلاعات ورودی
         $request->validate([
-            'name' => 'required|string|max:255',
-            'password' => 'nullable|string|min:4|confirmed',
+            'name' => 'required|string|max:255', // نام ادمین برای جستجو
+            'password' => 'nullable|string|min:4|confirmed', // رمز عبور جدید
+            'email' => 'nullable|email|max:255', // ایمیل جدید (اگر نیاز است)
         ]);
-
-        $admin = Auth::guard('admin')->user();
-
+    
+        // جستجوی ادمین بر اساس نام
+        $admin = Admin::where('name', $request->input('name'))->first();
+    
+        // اگر ادمین یافت نشد
         if (!$admin) {
-            return redirect()->back()->withErrors(['error' => 'ادمین یافت نشد.']);
+            return redirect()->back()->withErrors(['error' => 'ادمین با این نام یافت نشد.']);
         }
-        // به‌روز‌رسانی اطلاعات ادمین
-        $admin->name = $request->input('name');
-
-        // در صورت وجود رمز عبور جدید، رمز عبور را به‌روز‌رسانی کنید
+    
+        // به‌روزرسانی ایمیل (اگر ارسال شده باشد)
+        if ($request->filled('email')) {
+            $admin->email = $request->input('email');
+        }
+    
+        // به‌روزرسانی رمز عبور (اگر ارسال شده باشد)
         if ($request->filled('password')) {
             $admin->password = Hash::make($request->input('password'));
         }
-
+    
         // ذخیره تغییرات
         $admin->save();
-
-        $msj = "Admin updated successfully!";
-        $admins = Admin::all();
-
-        // بازگرداندن پیام موفقیت
+    
+        // پیام موفقیت
+        $msj = "اطلاعات ادمین با موفقیت به‌روزرسانی شد!";
         return redirect()->route('admin.dashboard')->with('success', $msj);
     }
 

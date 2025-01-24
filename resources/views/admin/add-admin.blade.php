@@ -27,7 +27,7 @@
             </form>
         </div>
     </div>
-    
+
     <div class="card mb-5 shadow-sm">
         <div class="card-header bg-secondary text-white">
             <h4 class="mb-0">ویرایش اطلاعات ادمین</h4>
@@ -43,10 +43,35 @@
 
                 @method('PUT')
 
-                <input type="text" id="name" name="name" placeholder="name" required>
-                <input type="password" id="password_confirmation"placeholder="password" name="password_confirmation">
-                <button type="submit" class="btn btn-success">ویرایش</button>
+                <!-- فیلد نام ادمین -->
+                <div class="form-group">
+                    <label for="name">نام ادمین</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="نام ادمین"
+                        required>
+                </div>
 
+                <!-- فیلد ایمیل (اختیاری) -->
+                <div class="form-group">
+                    <label for="email">ایمیل جدید (اختیاری)</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="ایمیل جدید">
+                </div>
+
+                <!-- فیلد رمز عبور جدید (اختیاری) -->
+                <div class="form-group">
+                    <label for="new_password">رمز عبور جدید (اختیاری)</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password"
+                        placeholder="رمز عبور جدید">
+                </div>
+
+                <!-- فیلد تأیید رمز عبور جدید -->
+                <div class="form-group">
+                    <label for="new_password_confirmation">تأیید رمز عبور جدید</label>
+                    <input type="password" class="form-control" id="new_password_confirmation"
+                        name="new_password_confirmation" placeholder="تأیید رمز عبور جدید">
+                </div>
+
+                <!-- دکمه ارسال -->
+                <button type="submit" class="btn btn-success">ویرایش</button>
             </form>
         </div>
     </div>
